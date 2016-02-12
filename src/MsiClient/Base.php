@@ -12,7 +12,6 @@ namespace MsiClient;
 class Base
 {
 
-
     public function teste($teste) {
         echo $teste;
     }
