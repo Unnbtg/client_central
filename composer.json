@@ -1,21 +1,20 @@
 {
-
-    "type": "package",
-    "package": {
-      "name": "Unnbtg/client_central",
-      "version": "dev-master",
-      "source": {
-        "url": "https://github.com/Unnbtg/client_central.git",
-        "type": "git",
-        "reference": "master"
-      },
-      "autoload": {
-        "psr-0" : {
-          "Unnbtg\\Client" : "src"
-        }
-      }
-    },
+  "name": "Unnbtg/client_central",
+  "description": "My first Composer project",
+  "authors": [
+    {
+      "name": "Marco Augusto",
+      "email": "btgmarco33@gmail.com"
+    }
+  ],
+  "minimum-stability": "dev",
   "require": {
-      "guzzle/guzzle": "*"
+    "php": ">=5.6.0",
+    "guzzle/guzzle": "*"
+  },
+  "autoload": {
+    "psr-0": {
+      "Client": "src/"
+    }
   }
 }
