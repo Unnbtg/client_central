@@ -1,0 +1,24 @@
+{
+  "repositories": [
+    {
+      "type": "package",
+      "package": {
+        "name": "Unnbtg/client_central",
+        "version": "dev-master",
+        "source": {
+          "url": "https://github.com/Unnbtg/client_central.git",
+          "type": "git",
+          "reference": "master"
+        },
+        "autoload": {
+          "psr-0" : {
+            "Unnbtg\\Client" : "src"
+          }
+        }
+      }
+    }
+  ],
+  "require": {
+      "guzzle/guzzle": "*"
+  }
+}
