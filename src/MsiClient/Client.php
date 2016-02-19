@@ -9,7 +9,6 @@
 namespace MsiClient;
 
 use MsiClient\Central\Exception\General;
-use MsiClient\Central\Exception\Server;
 
 /***
  * Basic class to communicate with the api server.
@@ -90,7 +89,7 @@ class Client
             $this->setToken($newToken);
             return true;
 
-        } catch (Server $e) {
+        } catch ( MsiClient\Central\Exception\Server $e) {
             throw $e;
         } catch (\Exception $e) {
             throw new General($e->getMessage(), $e->getCode(), $e);
