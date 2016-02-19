@@ -9,6 +9,7 @@
 namespace MsiClient;
 
 use MsiClient\Central\Exception\General;
+use MsiClient\Central\Exception\Server;
 
 /***
  * Basic class to communicate with the api server.
@@ -51,15 +52,17 @@ class Client
         return $this->server->callApi($type, $url, $params);
     }
 
-    /**
+    /***
      * Restore a token, preventing from the need to do another authentication on the server.
      * @param string $clientId Client Id used for the first authentication.
-     * @return bool Either if it found or didn't found a token, It also takes in consideration if the Token has expired or not.
+     * @return bool string Either if it found or didn't found a token, It also takes in consideration if the Token has expired or not.
+     * @throws General Something went wrong... it shouldn't be happening.
+     * @throws Server Something went wrong with the login or the login wasn't valid.
+     * @throws \Exception Unknown area.
      */
     public function restoreToken($clientId) {
 
         try {
-
             $token = Token::restore($clientId);
 
             if (is_null($token)) {
@@ -86,7 +89,8 @@ class Client
 
             $this->setToken($newToken);
             return true;
-        } catch (\Server $e) {
+
+        } catch (Server $e) {
             throw $e;
         } catch (\Exception $e) {
             throw new General($e->getMessage(), $e->getCode(), $e);
