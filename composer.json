@@ -1,6 +1,7 @@
 {
   "name": "unnbtg/client_central",
   "description": "My first Composer project",
+  "version": "0.0.1",
   "authors": [
     {
       "name": "Marco Augusto",
