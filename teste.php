@@ -18,7 +18,6 @@ try {
     $client = new \MsiClient\Client($server);
     $login = new \MsiClient\Central\Commands\Login();
 
-    var_dump($client->restoreToken(1));exit;
     $login->setClient($client);
 
 
