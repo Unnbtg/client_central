@@ -8,9 +8,10 @@
 
 namespace MsiClient;
 
-use Guzzle\Http\Client;
-use Guzzle\Http\Exception\ClientErrorResponseException;
-use Guzzle\Http\Message\Response;
+
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Psr7\Response;
 use MsiClient\Central\Factory\Formatter;
 
 /***
@@ -68,13 +69,13 @@ class Server
     {
         $client = new Client();
 
-        $request = $client->createRequest($type, $this->addToken($url), null, $params);
+
         try {
 
-            $response = $request->send();
+            $response = $client->request($type, $this->addToken($url), ['form_params' => $params]);
             return $this->_parse($response);
 
-        } catch (ClientErrorResponseException $e) {
+        } catch (ClientException $e) {
 
             throw new \MsiClient\Central\Exception\Server($e->getResponse()->getBody(), $e->getCode(), $this->_parse($e->getResponse()), $e->getResponse(),
                 $e->getRequest(), $e);
@@ -86,13 +87,14 @@ class Server
 
     private function _parse(Response $response)
     {
-        $contentType  = $response->getContentType();
+
+        $contentType  = $response->getHeader('Content-Type');
 
         if (is_null($contentType)) {
             return $response->getBody();
         }
 
-        $formatter = Formatter::create($contentType);
+        $formatter = Formatter::create($contentType[0]);
 
         if (is_null($formatter)) {
             return $response->getBody();
