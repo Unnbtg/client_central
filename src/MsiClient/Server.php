@@ -101,6 +101,5 @@ class Server
         }
 
         return $formatter->decode($response->getBody());
-
     }
 }

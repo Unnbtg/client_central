@@ -24,7 +24,7 @@ class Client extends Command
         return $this->perform($formatter->encode($client->toArray()), \MsiClient\Client::POST_REQUEST);
     }
 
-    public function listAll() {
-        return $this->perform([], \MsiClient\Client::GET_REQUEST);
+    public function listAll($page) {
+        return $this->perform(['page' => $page], \MsiClient\Client::GET_REQUEST);
     }
 }
