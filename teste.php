@@ -21,7 +21,17 @@ try {
     $login->setClient($client);
 
 
-    var_dump($login->getAccessToken('client_credentials', '$2y$10$0QsvQBVdHmNQSUNpaf86bOuUNiYzBCJjY', '1', true));
+
+
+    $token = $login->getAccessToken('client_credentials', '$2y$10$0QsvQBVdHmNQSUNpaf86bOuUNiYzBCJjY', '1', true);
+
+    $cliente = new \MsiClient\Central\Commands\Client();
+    $client->setToken($token);
+
+    $param = new \MsiClient\Central\Commands\Properties\ClientProperties();
+    $param->code = 'u1546';
+    $cliente->setClient($client);
+    var_dump($cliente->listAll());
 } catch (\MsiClient\Central\Exception\Server $e) {
     var_dump($e);
 }

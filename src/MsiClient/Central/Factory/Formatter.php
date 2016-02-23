@@ -14,7 +14,10 @@ use MsiClient\Central\Formatter\Json;
 
 class Formatter
 {
-    private static $fomatters= [
+
+
+
+    private static $fomatters = [
       'application/json' => Json::class
     ];
 

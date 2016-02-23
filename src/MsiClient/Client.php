@@ -24,6 +24,7 @@ class Client
 
     const PUT_REQUEST = 'PUT';
 
+    const Formart_Request = 'application/json';
 
     /**
      * @var Server the client is connected with.
