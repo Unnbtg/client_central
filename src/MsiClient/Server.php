@@ -56,11 +56,19 @@ class Server
         $this->token = $token;
     }
 
+    protected function addToken($url) {
+        if (empty($this->token)) {
+            return $url;
+        }
+
+        return $url.'?access_token='. $this->token->access_token;
+    }
+
     public function callApi($type, $url, $params)
     {
-
         $client = new Client();
-        $request = $client->createRequest($type, $url, null, $params);
+
+        $request = $client->createRequest($type, $this->addToken($url), null, $params);
         try {
 
             $response = $request->send();
