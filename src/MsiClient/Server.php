@@ -57,26 +57,27 @@ class Server
         $this->token = $token;
     }
 
-    protected function addToken($url) {
+    protected function getQuery($params = null) {
         if (empty($this->token)) {
-            return $url;
+            return [];
         }
-
-        return $url.'?access_token='. $this->token->access_token;
+        if (empty($params)) {
+            return ['access_token' => $this->token->access_token];
+        }
+        return array_merge($params, ['access_token' => $this->token->access_token]);
     }
 
     public function callApi($type, $url, $params)
     {
         $client = new Client();
-
+        $query = ($type == \MsiClient\Client::GET_REQUEST) ? $this->getQuery($params) : $this->getQuery();
 
         try {
 
-            $response = $client->request($type, $this->addToken($url), ['form_params' => $params]);
+            $response = $client->request($type, $url, ['form_params' => $params, 'query' => $query]);
             return $this->_parse($response);
 
         } catch (ClientException $e) {
-
             throw new \MsiClient\Central\Exception\Server($e->getResponse()->getBody(), $e->getCode(), $this->_parse($e->getResponse()), $e->getResponse(),
                 $e->getRequest(), $e);
         }
