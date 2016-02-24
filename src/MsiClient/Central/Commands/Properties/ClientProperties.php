@@ -58,6 +58,13 @@ class ClientProperties
     public $customer_id;
 
 
+    public static $statusToText = [
+        1 => 'ativo',
+        2 => 'suspenso',
+        3 => 'cancelado',
+        4 => 'pré cliente'
+    ];
+
     public function toArray() {
         $retorno = [];
         foreach ($this as $key => $property) {

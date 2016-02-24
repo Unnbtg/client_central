@@ -25,6 +25,10 @@ class Client extends Command
     }
 
     public function listAll($page) {
-        return $this->perform(['page' => $page], \MsiClient\Client::GET_REQUEST);
+        return $this->perform(['page' => $page], \MsiClient\Client::GET_REQUEST, $this->getUrl());
+    }
+
+    public function getClient($code) {
+        return $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl().'/'.$code);
     }
 }

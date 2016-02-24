@@ -29,9 +29,10 @@ try {
     $client->setToken($token);
 
     $param = new \MsiClient\Central\Commands\Properties\ClientProperties();
-    $param->code = 'u1546';
+
     $cliente->setClient($client);
-    var_dump($cliente->listAll());
+    echo $cliente->getClient('u0399');
 } catch (\MsiClient\Central\Exception\Server $e) {
-    var_dump($e);
+    echo $e->getMessage();
+    echo 'deu ruim';
 }
