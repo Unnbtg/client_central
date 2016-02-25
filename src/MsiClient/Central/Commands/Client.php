@@ -8,13 +8,11 @@
 
 namespace MsiClient\Central\Commands;
 
-
 use MsiClient\Central\Commands\Properties\ClientProperties;
 use MsiClient\Central\Factory\Formatter;
 
 class Client extends Command
 {
-
     public $url = '/client';
 
     public  function save(ClientProperties $client) {
@@ -30,5 +28,9 @@ class Client extends Command
 
     public function getClient($code) {
         return $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl().'/'.$code);
+    }
+
+    public function getContacts($id) {
+        return $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl().'/contacts/'.$id);
     }
 }
