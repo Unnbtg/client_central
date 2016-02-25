@@ -58,11 +58,13 @@ class Server
     }
 
     protected function getQuery($params = null) {
-        if (empty($this->token)) {
-            return [];
-        }
+
         if (empty($params)) {
-            return ['access_token' => $this->token->access_token];
+            $params = [];
+        }
+
+        if (empty($this->token)) {
+            return $params;
         }
         return array_merge($params, ['access_token' => $this->token->access_token]);
     }
@@ -70,16 +72,17 @@ class Server
     public function callApi($type, $url, $params)
     {
         $client = new Client();
-        $query = ($type == \MsiClient\Client::GET_REQUEST) ? $this->getQuery($params) : $this->getQuery();
+
+        $query = $this->getQuery($params);
 
         try {
-
-            $response = $client->request($type, $url, ['form_params' => $params, 'query' => $query]);
+            $response = $client->request($type, $url, ['form_params' => $query, 'query' => $query]);
             return $this->_parse($response);
-
         } catch (ClientException $e) {
             throw new \MsiClient\Central\Exception\Server($e->getResponse()->getBody(), $e->getCode(), $this->_parse($e->getResponse()), $e->getResponse(),
                 $e->getRequest(), $e);
+        } catch (\ErrorException $e) {
+            var_dump($params);exit;
         }
 
 

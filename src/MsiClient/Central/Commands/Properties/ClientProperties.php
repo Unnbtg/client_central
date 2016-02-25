@@ -57,6 +57,70 @@ class ClientProperties
      */
     public $customer_id;
 
+    /***
+     * @var string
+     */
+    public $name;
+
+    /**
+     * @var string
+     */
+    public $company_name;
+
+    /***
+     * @var string
+     */
+    public $cpf_cnpj;
+
+    /**
+     * @var string
+     */
+    public $ie;
+
+    /**
+     * @var string
+     */
+    public $rg;
+
+    /**
+     * @var string
+     */
+    public $cep;
+
+    /**
+     * @var string
+     */
+    public $address;
+
+    /**
+     * @var string
+     */
+    public $number;
+
+    /**
+     * @var string
+     */
+    public $complement;
+
+    /**
+     * @var string
+     */
+    public $neighborhood;
+
+    /**
+     * @var string
+     */
+    public $city;
+
+    /**
+     * @var string
+     */
+    public $uf;
+
+    /**
+     * @var integer
+     */
+    public $billing_day;
 
     public static $statusToText = [
         1 => 'ativo',
