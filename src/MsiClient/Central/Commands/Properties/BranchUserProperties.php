@@ -9,7 +9,7 @@
 namespace MsiClient\Central\Commands\Properties;
 
 
-class BranchProperties extends PropertiesAbstract
+class BranchUserProperties extends PropertiesAbstract
 {
 
     /**
@@ -73,8 +73,11 @@ class BranchProperties extends PropertiesAbstract
     public $active;
 
     /**
-     * @var bool
+     * 1 = Admin
+     * 2 = Financeiro
+     * 3 = Usuario
+     * @var integer
      */
-    public $admin;
+    public $contact_type;
 
 }
