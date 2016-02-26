@@ -32,7 +32,7 @@ interface IFormatter
 
     /**
      * Transform any object into a string into a string for the format
-     * @param object $value
+     * @param mixed $value
      * @return string mixed
      */
     public function encode($value);
