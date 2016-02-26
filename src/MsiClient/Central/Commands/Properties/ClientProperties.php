@@ -9,7 +9,7 @@
 namespace MsiClient\Central\Commands\Properties;
 
 
-class ClientProperties
+class ClientProperties extends PropertiesAbstract
 {
     /**
      * @var integer
@@ -21,6 +21,12 @@ class ClientProperties
      * @var
      */
     public $code;
+
+    /**
+     *
+     * @var string
+     */
+    public $state_registration;
 
     /**
      * 0 = Inactive
@@ -128,15 +134,4 @@ class ClientProperties
         3 => 'cancelado',
         4 => 'pré cliente'
     ];
-
-    public function toArray() {
-        $retorno = [];
-        foreach ($this as $key => $property) {
-            $retorno[$key] = $property;
-        }
-
-        return $retorno;
-    }
-
-
 }
