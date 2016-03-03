@@ -18,8 +18,9 @@ class Client extends Command
     public  function save(ClientProperties $client) {
 
         $formatter = Formatter::create(\MsiClient\Client::Formart_Request);
-
-        return $this->perform($formatter->encode($client->toArray()), \MsiClient\Client::POST_REQUEST);
+        return $this->perform(
+            ['data' => $formatter->encode(['client' => $client->toArray()])],
+            \MsiClient\Client::POST_REQUEST);
     }
 
     public function listAll($page) {

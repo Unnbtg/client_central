@@ -6,12 +6,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/guzzle/promises.git",
-            "reference": "b59321a17f3e3ebc14f2bbbf73b4d065a88cf3f6"
+            "reference": "976e0f50981f845dcee1c25bfcac2304a7bb5583"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/guzzle/promises/zipball/b59321a17f3e3ebc14f2bbbf73b4d065a88cf3f6",
-            "reference": "b59321a17f3e3ebc14f2bbbf73b4d065a88cf3f6",
+            "url": "https://api.github.com/repos/guzzle/promises/zipball/976e0f50981f845dcee1c25bfcac2304a7bb5583",
+            "reference": "976e0f50981f845dcee1c25bfcac2304a7bb5583",
             "shasum": ""
         },
         "require": {
@@ -20,7 +20,7 @@
         "require-dev": {
             "phpunit/phpunit": "~4.0"
         },
-        "time": "2016-02-10 14:20:03",
+        "time": "2016-02-26 22:29:15",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -165,17 +165,17 @@
     },
     {
         "name": "guzzlehttp/guzzle",
-        "version": "6.1.1",
-        "version_normalized": "6.1.1.0",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
         "source": {
             "type": "git",
             "url": "https://github.com/guzzle/guzzle.git",
-            "reference": "c6851d6e48f63b69357cbfa55bca116448140e0c"
+            "reference": "739b9c8378c462943c42fee5353453ab4164ed8e"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/guzzle/guzzle/zipball/c6851d6e48f63b69357cbfa55bca116448140e0c",
-            "reference": "c6851d6e48f63b69357cbfa55bca116448140e0c",
+            "url": "https://api.github.com/repos/guzzle/guzzle/zipball/739b9c8378c462943c42fee5353453ab4164ed8e",
+            "reference": "739b9c8378c462943c42fee5353453ab4164ed8e",
             "shasum": ""
         },
         "require": {
@@ -188,14 +188,14 @@
             "phpunit/phpunit": "~4.0",
             "psr/log": "~1.0"
         },
-        "time": "2015-11-23 00:47:50",
+        "time": "2016-02-17 21:09:10",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "6.1-dev"
+                "dev-master": "6.2-dev"
             }
         },
-        "installation-source": "dist",
+        "installation-source": "source",
         "autoload": {
             "files": [
                 "src/functions_include.php"
