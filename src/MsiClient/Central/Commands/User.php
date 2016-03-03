@@ -17,4 +17,9 @@ class User extends Command
         return $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl().'/vendor');
     }
 
+    public function getCustomer() {
+        return $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl().'/customer');
+    }
+
+
 }

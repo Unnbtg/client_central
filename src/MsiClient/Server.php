@@ -57,43 +57,39 @@ class Server
         $this->token = $token;
     }
 
-    protected function getQuery($params = null) {
-
-        if (empty($params)) {
-            $params = [];
-        }
-
-        if (empty($this->token)) {
-            return $params;
-        }
-        return array_merge($params, ['access_token' => $this->token->access_token]);
+    public function getToken() {
+        return $this->token;
     }
+
 
     public function callApi($type, $url, $params)
     {
         $client = new Client();
-
-        $query = $this->getQuery($params);
-
         try {
-            $response = $client->request($type, $url, ['form_params' => $query, 'query' => $query]);
+            $response = $client->request($type, $url, $params);
             return $this->_parse($response);
+
         } catch (ClientException $e) {
+            echo $e->getMessage();exit;
             throw new \MsiClient\Central\Exception\Server($e->getResponse()->getBody(), $e->getCode(), $this->_parse($e->getResponse()), $e->getResponse(),
                 $e->getRequest(), $e);
         } catch (\ErrorException $e) {
-            var_dump($params);exit;
+            echo $e->getMessage();
+        } catch (\ServerException $e) {
+
+            echo $e->getTraceAsString();
         }
-
-
     }
 
+
+    public function isSsl() {
+        return strpos($this->host, 'https://') === 0;
+    }
 
     private function _parse(Response $response)
     {
 
         $contentType  = $response->getHeader('Content-Type');
-
         if (is_null($contentType)) {
             return $response->getBody();
         }
@@ -101,7 +97,7 @@ class Server
         $formatter = Formatter::create($contentType[0]);
 
         if (is_null($formatter)) {
-            return $response->getBody();
+            return $response->getBody()->getContents();
         }
 
         return $formatter->decode($response->getBody());
