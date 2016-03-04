@@ -11,7 +11,6 @@ namespace MsiClient\Whm\Commands\Properties;
 
 abstract class PropertiesAbstract
 {
-
     public function toArray() {
         $retorno = [];
         foreach ($this as $key => $property) {
@@ -30,7 +29,5 @@ abstract class PropertiesAbstract
         }
 
         return $instance;
-
     }
-
 }

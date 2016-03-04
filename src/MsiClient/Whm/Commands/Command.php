@@ -16,7 +16,6 @@ use MsiClient\Whm\Exception\InvalidRequest;
 
 abstract class Command
 {
-
     /***
      * @var Client $client
      */
