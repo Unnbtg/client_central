@@ -39,7 +39,12 @@ class Account extends Command
 
         $retorno = $this->perform($array, \MsiClient\Client::POST_REQUEST, $this->getUrl("/listaccts"));
 
+        if (isset($retorno->metadata->reason) && $retorno->metadata->reason == "No accounts found.") {
+            return false;
+        }
+
         if (!$retorno->metadata->result) {
+
             throw new InvalidRequest('Ocorreu um erro na requisição.');
         }
 
