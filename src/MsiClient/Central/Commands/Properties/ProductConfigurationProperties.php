@@ -9,10 +9,16 @@
 namespace MsiClient\Central\Commands\Properties;
 
 
+/***
+ * Class ProductConfigurationProperties
+ * @package MsiClient\Central\Commands\Properties
+ *
+ *
+ * @property integer $client_id
+ * @property string $name
+ * @property integer $product_id
+ * @property mixed $value
+ */
 class ProductConfigurationProperties extends PropertiesAbstract
 {
-    public $client_id;
-    public $config_name;
-    public $product_id;
-    public $value;
 }

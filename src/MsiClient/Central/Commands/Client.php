@@ -15,23 +15,51 @@ class Client extends Command
 {
     public $url = '/client';
 
-    public  function save(ClientProperties $client) {
+    public function save(ClientProperties $client)
+    {
+        try {
+            $formatter = Formatter::create(\MsiClient\Client::Formart_Request);
 
-        $formatter = Formatter::create(\MsiClient\Client::Formart_Request);
-        return $this->perform(
-            ['data' => $formatter->encode(['client' => $client->toArray()])],
-            \MsiClient\Client::POST_REQUEST);
+            if (!is_null($client->id)) {
+                return $this->perform(
+                    ['data' => $formatter->encode(['client' => $client->toArray()])],
+                    \MsiClient\Client::PUT_REQUEST, $this->getUrl() . '/' . $client->id);
+            } else {
+                return $this->perform(
+                    ['data' => $formatter->encode(['client' => $client->toArray()])],
+                    \MsiClient\Client::POST_REQUEST);
+            }
+
+        } catch (\Exception $e) {
+            throw  $e;
+        }
+
     }
 
-    public function listAll($page) {
-        return $this->perform(['page' => $page], \MsiClient\Client::GET_REQUEST, $this->getUrl());
+    public function listAll($page)
+    {
+        try {
+            return $this->perform(['page' => $page], \MsiClient\Client::GET_REQUEST, $this->getUrl());
+        } catch (\Exception $e) {
+            throw  $e;
+        }
     }
 
-    public function getClient($code) {
-        return $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl().'/'.$code);
+    public function getClient($code)
+    {
+        try {
+            return $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl() . '/' . $code);
+        } catch (\Exception $e) {
+            throw  $e;
+        }
     }
 
-    public function getContacts($id) {
-        return $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl().'/contacts/'.$id);
+    public function getContacts($id)
+    {
+        try {
+            return $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl() . '/contacts/' . $id);
+        } catch (\Exception $e) {
+            throw  $e;
+        }
     }
 }

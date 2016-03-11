@@ -18,16 +18,24 @@ class SciOnline extends Command
 
     public function getStatus($clientId)
     {
-        return $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl() . '/status/' . $clientId);
+        try {
+            return $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl() . '/status/' . $clientId);
+        } catch (\Exception $e) {
+            throw  $e;
+        }
     }
 
     public function setConfig(ProductConfigurationProperties $config)
     {
-        $formatter = Formatter::create(\MsiClient\Client::Formart_Request);
+        try {
+            $formatter = Formatter::create(\MsiClient\Client::Formart_Request);
 
-        return $this->perform(
-            ['data' => $formatter->encode(['sci-online' => $config->toArray()])],
-            \MsiClient\Client::POST_REQUEST, $this->getUrl() . '/set-config');
+            return $this->perform(
+                ['data' => $formatter->encode(['sci-online' => $config->toArray()])],
+                \MsiClient\Client::POST_REQUEST, $this->getUrl() . '/set-config');
+        } catch (\Exception $e) {
+            throw  $e;
+        }
     }
 
 }

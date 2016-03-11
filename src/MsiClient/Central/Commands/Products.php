@@ -14,6 +14,10 @@ class Products extends Command
     public $url = '/products';
 
     public function getStatus($clientId) {
-        return $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl().'/status/'.$clientId);
+        try {
+            return $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl() . '/status/' . $clientId);
+        } catch (\Exception $e) {
+            throw  $e;
+        }
     }
 }

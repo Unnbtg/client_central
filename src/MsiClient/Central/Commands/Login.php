@@ -21,28 +21,32 @@ class Login extends Command implements ILogin
 
     public function getAccessToken($grant_type, $client_secret, $client_id, $preserve = false)
     {
-        $response = $this->perform([
-            'grant_type' => $grant_type,
-            'client_secret' => $client_secret,
-            'client_id' => $client_id
-        ], Client::POST_REQUEST);
+        try {
+            $response = $this->perform([
+                'grant_type' => $grant_type,
+                'client_secret' => $client_secret,
+                'client_id' => $client_id
+            ], Client::POST_REQUEST);
 
-        $token = new Token();
+            $token = new Token();
 
-        $token->access_token = $response->access_token;
-        $token->expire = new \DateTime("+ {$response->expires_in} seconds");
-        $token->token_type = $response->token_type;
-        $token->from = self::class;
-        $token->preserve = $preserve;
+            $token->access_token = $response->access_token;
+            $token->expire = new \DateTime("+ {$response->expires_in} seconds");
+            $token->token_type = $response->token_type;
+            $token->from = self::class;
+            $token->preserve = $preserve;
 
-        if ($preserve) {
-            $token->clientId = $client_id;
-            $token->grantType = $grant_type;
-            $token->clientSecret = $client_secret;
+            if ($preserve) {
+                $token->clientId = $client_id;
+                $token->grantType = $grant_type;
+                $token->clientSecret = $client_secret;
+            }
+
+            $token->store($client_id);
+            return $token;
+        } catch (\Exception $e) {
+            throw  $e;
         }
-
-        $token->store($client_id);
-        return $token;
     }
 
     /**
@@ -50,7 +54,11 @@ class Login extends Command implements ILogin
      */
     public function login(Token $token)
     {
-        return $this->getAccessToken($token->grantType, $token->clientSecret, $token->clientId, $token->preserve);
+        try {
+            return $this->getAccessToken($token->grantType, $token->clientSecret, $token->clientId, $token->preserve);
+        } catch (\Exception $e) {
+            throw  $e;
+        }
     }
 
 

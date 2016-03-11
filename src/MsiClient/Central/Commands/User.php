@@ -13,12 +13,22 @@ class User extends Command
 {
     public $url = '/user';
 
-    public function getVendor() {
-        return $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl().'/vendor');
+    public function getVendor()
+    {
+        try {
+            return $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl() . '/vendor');
+        } catch (\Exception $e) {
+            throw  $e;
+        }
     }
 
-    public function getCustomer() {
-        return $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl().'/customer');
+    public function getCustomer()
+    {
+        try {
+            return $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl() . '/customer');
+        } catch (\Exception $e) {
+            throw  $e;
+        }
     }
 
 
