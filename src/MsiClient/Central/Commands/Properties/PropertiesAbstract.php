@@ -12,7 +12,8 @@ namespace MsiClient\Central\Commands\Properties;
 abstract class PropertiesAbstract
 {
 
-    public function toArray() {
+    public function toArray()
+    {
         $retorno = [];
         foreach ($this as $key => $property) {
             $retorno[$key] = $property;
@@ -20,5 +21,18 @@ abstract class PropertiesAbstract
 
         return $retorno;
     }
+
+    public function fromStdClass($std) {
+        return $this->fromJsonElement($std);
+    }
+
+    protected function fromJsonElement($elements) {
+        foreach($elements as $name => $value) {
+            $this->$name = $value;
+        }
+
+        return $this;
+    }
+
 
 }

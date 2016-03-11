@@ -20,11 +20,16 @@ class BranchUser extends Command
 
     public  function save(BranchUserProperties $branch) {
 
-        $formatter = Formatter::create(\MsiClient\Client::Formart_Request);
+        try {
+            $formatter = Formatter::create(\MsiClient\Client::Formart_Request);
 
-        return $this->perform(
-            ['data' => $formatter->encode(['branch' => $branch->toArray()])],
-            \MsiClient\Client::POST_REQUEST
-        );
+            return $this->perform(
+                ['data' => $formatter->encode(['branch' => $branch->toArray()])],
+                \MsiClient\Client::POST_REQUEST
+            );
+        } catch (\Exception $e){
+            throw  $e;
+        }
+
     }
 }

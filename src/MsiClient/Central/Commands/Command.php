@@ -25,7 +25,7 @@ abstract class Command
 
     public function getUrl()
     {
-        return $this->client->getHost().  $this->url;
+        return $this->client->getHost() . $this->url;
     }
 
 
@@ -39,7 +39,7 @@ abstract class Command
 
     /**
      * Perform what the command is intended to do.
-     * @param mixed $params  An array with the values the command need to do the action.
+     * @param mixed $params An array with the values the command need to do the action.
      * @param string $typeRequest Type of the request
      * @param null $url
      * @return array|\Guzzle\Http\EntityBodyInterface|string
@@ -47,15 +47,19 @@ abstract class Command
      */
     protected function perform($params, $typeRequest, $url = null)
     {
-        if (is_null($url)) {
-            $url = $this->getUrl();
-        }
+        try {
+            if (is_null($url)) {
+                $url = $this->getUrl();
+            }
 
-        if (empty($this->client)) {
-            throw new General('You must provide a MSiClient\Central\Client in order to perform any requisition to the server.');
-        }
+            if (empty($this->client)) {
+                throw new General('You must provide a MSiClient\Central\Client in order to perform any requisition to the server.');
+            }
 
-        return $this->client->makeRequest($url, $typeRequest, $params);
+            return $this->client->makeRequest($url, $typeRequest, $params);
+        } catch (\Exception $e) {
+            throw  $e;
+        }
     }
 
 

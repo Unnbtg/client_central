@@ -11,8 +11,10 @@ namespace MsiClient;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\ServerException;
 use GuzzleHttp\Psr7\Response;
 use MsiClient\Central\Factory\Formatter;
+use Psr\Http\Message\ResponseInterface;
 
 /***
  * Class that estabilish the basic functions to connect with the server.
@@ -65,19 +67,21 @@ class Server
     public function callApi($type, $url, $params)
     {
         $client = new Client();
+
         try {
             $response = $client->request($type, $url, $params);
             return $this->_parse($response);
 
         } catch (ClientException $e) {
-            echo $e->getMessage();exit;
             throw new \MsiClient\Central\Exception\Server($e->getResponse()->getBody(), $e->getCode(), $this->_parse($e->getResponse()), $e->getResponse(),
                 $e->getRequest(), $e);
         } catch (\ErrorException $e) {
-            echo $e->getMessage();
-        } catch (\ServerException $e) {
-
-            echo $e->getTraceAsString();
+            throw new \MsiClient\Central\Exception\Server($e->getMessage(), $e->getCode(), null, null, null, $e);
+        } catch (ServerException $e) {
+            throw new \MsiClient\Central\Exception\Server($e->getResponse()->getBody(), $e->getCode(), $this->_parse($e->getResponse()), $e->getResponse(),
+                $e->getRequest(), $e);
+        } catch (\Exception $e){
+            throw new \MsiClient\Central\Exception\Server($e->getMessage(), $e->getCode(), null, null, null, $e);
         }
     }
 
@@ -86,7 +90,7 @@ class Server
         return strpos($this->host, 'https://') === 0;
     }
 
-    private function _parse(Response $response)
+    private function _parse(ResponseInterface $response)
     {
 
         $contentType  = $response->getHeader('Content-Type');

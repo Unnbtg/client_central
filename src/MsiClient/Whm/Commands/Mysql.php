@@ -8,7 +8,6 @@
 
 namespace MsiClient\Whm\Commands;
 
-
 use MsiClient\Whm\Exception\InvalidRequest;
 
 class Mysql extends Command
@@ -145,17 +144,65 @@ class Mysql extends Command
         return true;
     }
 
+    public function listDatabase()
+    {
+        $retorno = $this->perform([
+            'cpanel_jsonapi_module' => 'MysqlFE',
+            'cpanel_jsonapi_func' => 'listdbs',
+            'cpanel_jsonapi_apiversion' => 2
+        ], \MsiClient\Client::POST_REQUEST, $this->getUrl('cpanel'))->cpanelresult;
+
+        if (!$retorno->event->result) {
+            throw  new InvalidRequest("Ocorreu um erro na requisição." . $retorno->error);
+        }
+
+        $dbs = [];
+
+        foreach ($retorno->data as $db) {
+            $dbs[] = $db->db;
+        }
+
+        return $dbs;
+    }
+
+    public function userExists($user)
+    {
+        $retorno = $this->perform([
+            'dbuser' => $this->addAcc($user),
+            'cpanel_jsonapi_module' => 'MysqlFE',
+            'cpanel_jsonapi_func' => 'dbuserexists',
+            'cpanel_jsonapi_apiversion' => 2
+        ], \MsiClient\Client::POST_REQUEST, $this->getUrl('cpanel'))->cpanelresult;
+
+        if ($retorno->event->result != '1') {
+            throw  new InvalidRequest("Ocorreu um erro na requisição." . $retorno->error);
+        }
+
+        return $retorno->data[0] != 0;
+    }
+
+    private function getPrefix()
+    {
+        return $this->acc . '_';
+    }
+
+    public function addPrefix($dbName)
+    {
+        return $this->addAcc($dbName);
+    }
 
     private function addAcc($nome)
     {
 
-        $prefix = $this->acc . '_';
+        $prefix = $this->getPrefix();
+
         if (strpos($nome, $prefix) === 0) {
             return $nome;
         }
 
         return $prefix . $nome;
     }
+
 
     public function needAcc()
     {
