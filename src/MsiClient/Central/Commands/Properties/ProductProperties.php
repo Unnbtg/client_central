@@ -19,6 +19,24 @@ namespace MsiClient\Central\Commands\Properties;
  */
 class ProductProperties extends PropertiesAbstract
 {
+
+    public function getCongifs() {
+        $retorno = [];
+        foreach( $this->configurations as $configurationProperties) {
+            $retorno[] = $configurationProperties->name;
+        }
+
+        return $retorno;
+    }
+
+    public function getConfigValue($name) {
+        foreach($this->configurations as $configuration) {
+            if ($configuration->name == $name) {
+                return $configuration->value;
+            }
+        }
+    }
+
     protected function fromJsonElement($elements)
     {
         parent::fromJsonElement($elements);
