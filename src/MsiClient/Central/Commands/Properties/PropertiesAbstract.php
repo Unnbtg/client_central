@@ -8,7 +8,6 @@
 
 namespace MsiClient\Central\Commands\Properties;
 
-
 abstract class PropertiesAbstract
 {
 

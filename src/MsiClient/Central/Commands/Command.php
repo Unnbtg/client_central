@@ -8,7 +8,6 @@
 
 namespace MsiClient\Central\Commands;
 
-
 use MsiClient\Central\Exception\General;
 use MsiClient\Client;
 

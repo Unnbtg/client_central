@@ -8,7 +8,6 @@
 
 namespace MsiClient\Whm\Commands\Properties;
 
-
 abstract class PropertiesAbstract
 {
     public function toArray() {
