@@ -17,7 +17,6 @@ namespace MsiClient\Central\Commands\Properties;
  * @property integer $client_id
  * @property string $name
  * @property integer $product_id
- * @property mixed $value
  */
 class ProductConfigurationProperties extends PropertiesAbstract
 {

@@ -40,12 +40,10 @@ class ProductProperties extends PropertiesAbstract
     protected function fromJsonElement($elements)
     {
         parent::fromJsonElement($elements);
-
-        $configs = new ProductConfigurationProperties();
-
         unset($this->configurations);
 
         foreach ($elements->configurations as $value) {
+            $configs = new ProductConfigurationProperties();
             $this->configurations[] = $configs->fromJsonElement($value);
         }
 

@@ -81,8 +81,10 @@ class Client
                 CURLOPT_SSL_VERIFYHOST => false,
 
             ];
+        }
 
-
+        if ($type == Client::PUT_REQUEST) {
+            $this->headers['headers']['Authorization'] = 'Bearer '. $this->server->getToken()->access_token;
         }
         $params = array_merge($params, $this->headers);
 

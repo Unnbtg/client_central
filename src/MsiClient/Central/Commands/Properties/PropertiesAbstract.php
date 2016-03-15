@@ -27,6 +27,12 @@ abstract class PropertiesAbstract
 
     protected function fromJsonElement($elements) {
         foreach($elements as $name => $value) {
+
+            if (in_array($name, ['created_at', 'updated_at', 'deleted_at'])) {
+                $this->$name = new \DateTime($value);
+                continue;
+            }
+
             $this->$name = $value;
         }
 

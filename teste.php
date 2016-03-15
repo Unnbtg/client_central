@@ -23,11 +23,23 @@ try {
     $token = $login->getAccessToken('client_credentials', '$2y$10$0QsvQBVdHmNQSUNpaf86bOuUNiYzBCJjY', '2', true);
     $cliente->setToken($token);
 
-    $client = new \MsiClient\Central\Commands\ClientProduct();
+    $clientConfig = new \MsiClient\Central\Commands\ClientProductConfiguration();
 
-    $client->setClient($cliente);
+    $teste1 = new \MsiClient\Central\Commands\Properties\ClientProductConfigurationProperties();
+    $teste1->product_configuration_id = 1;
+    $teste1->client_product_id = 3;
+    $teste1->value = 4;
 
-    var_dump($client->show(3));
+
+    $teste2 = new \MsiClient\Central\Commands\Properties\ClientProductConfigurationProperties();
+    $teste2->product_configuration_id = 2;
+    $teste2->client_product_id = 3;
+    $teste2->value = 1;
+
+    $clientConfig->setClient($cliente);
+    var_dump($clientConfig->updateMany([$teste1, $teste2]));
+
+
 
 
     /*$server = new \MsiClient\Server("https://192.168.0.138:2087/json-api/");

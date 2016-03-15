@@ -14,9 +14,9 @@ namespace MsiClient\Central\Commands\Properties;
  * @package MsiClient\Central\Commands\Properties
  * @property integer $client_product_id
  * @property integer $product_configuration_id
- * @property integer $product_configuration_id
  * @property integer $user_id
- * @property ProductConfigurationProperties $productConfiguration
+ * @property mixed $value
+ * @property ProductConfigurationProperties $product_configuration
  *
  */
 class ClientProductConfigurationProperties extends PropertiesAbstract
@@ -34,6 +34,4 @@ class ClientProductConfigurationProperties extends PropertiesAbstract
 
         return $this;
     }
-
-
 }
