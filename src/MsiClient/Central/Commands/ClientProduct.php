@@ -21,6 +21,8 @@ class ClientProduct extends Command
         try {
             $result = $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl() . $id)->data;
             $clientProduct = new ClientProductProperties();
+
+
             return $clientProduct->fromStdClass($result);
         } catch (\Exception $e) {
             throw  $e;
