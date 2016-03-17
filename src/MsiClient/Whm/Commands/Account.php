@@ -73,6 +73,7 @@ class Account extends Command
     {
         $account->transformTochange();
         $retorno = $this->perform($account->toArray(true), \MsiClient\Client::POST_REQUEST, $this->getUrl('/modifyacct'));
+
         if (!$retorno->metadata->result) {
             throw new InvalidRequest('Ocorreu um erro na requisição.' . $retorno->metadata->reason);
         }
