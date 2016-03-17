@@ -69,6 +69,18 @@ class Account extends Command
         return $retorno->data;
     }
 
+    public function change(AccountProperties $account)
+    {
+        $account->transformTochange();
+        $retorno = $this->perform($account->toArray(true), \MsiClient\Client::POST_REQUEST, $this->getUrl('/modifyacct'));
+
+        if (!$retorno->metadata->result) {
+            throw new InvalidRequest('Ocorreu um erro na requisição.' . $retorno->metadata->reason);
+        }
+
+        return $retorno->data;
+    }
+
 
     public function delete($acc, $keepDns = false)
     {

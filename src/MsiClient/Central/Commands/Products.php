@@ -20,6 +20,4 @@ class Products extends Command
             throw  $e;
         }
     }
-
-
 }

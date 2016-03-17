@@ -10,9 +10,14 @@ namespace MsiClient\Whm\Commands\Properties;
 
 abstract class PropertiesAbstract
 {
-    public function toArray() {
+    public function toArray($ignoreNull = false) {
         $retorno = [];
         foreach ($this as $key => $property) {
+
+            if ($ignoreNull && is_null($property)) {
+                continue;
+            }
+
             $retorno[$key] = $property;
         }
 
