@@ -69,7 +69,6 @@ class Server
         $client = new Client();
 
         try {
-            var_dump($params, $url);
             $response = $client->request($type, $url, $params);
             return $this->_parse($response);
 
