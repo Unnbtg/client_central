@@ -14,6 +14,8 @@ class AccountProperties extends PropertiesAbstract implements PropertiesFactoryI
 
     public $username;
 
+
+
     public $domain;
 
     public $plan;
@@ -85,10 +87,25 @@ class AccountProperties extends PropertiesAbstract implements PropertiesFactoryI
     public $owner;
 
 
+
+
     public static function create($array)
     {
         return self::factory($array, self::class);
     }
 
+
+    /***
+     * Campos usadios unicament edentro da requisição change
+     */
+    protected $user;
+    protected $dns;
+
+    public function transformTochange()
+    {
+
+        $this->user = $this->username;
+        $this->dns = $this->domain;
+    }
 
 }
