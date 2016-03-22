@@ -157,10 +157,10 @@ try {
     $token = $login->getAccessToken('client_credentials', '$2y$10$0QsvQBVdHmNQSUNpaf86bOuUNiYzBCJjY', '2', true);
     $cliente->setToken($token);
 
-    $cPlan = new \MsiClient\Central\Commands\ClientPlan();
+    $cPlan = new \MsiClient\Central\Commands\Plan();
     $cPlan->setClient($cliente);
 
-    var_dump($cPlan->find(17));
+    var_dump($cPlan->getPlan(1));
 
 
 } catch (\Exception $e) {

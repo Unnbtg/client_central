@@ -9,6 +9,8 @@
 namespace MsiClient\Central\Commands;
 
 
+use MsiClient\Central\Commands\Properties\PlanProperties;
+
 class Plan extends Command
 {
 
@@ -27,7 +29,11 @@ class Plan extends Command
     public function getPlan($id)
     {
         try {
-            return $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl().'/'. $id);
+
+            $retorno = $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl().'/'. $id);
+
+            $plan = new PlanProperties();
+            return $plan->fromStdClass($retorno);
         } catch (\Exception $e) {
             throw  $e;
         }
