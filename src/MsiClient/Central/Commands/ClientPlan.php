@@ -42,7 +42,6 @@ class ClientPlan extends Command
 
             $plan = new ClientPlanProperties();
 
-
             return $plan->fromStdClass($result);
         } catch (\Exception $e) {
             throw  $e;
