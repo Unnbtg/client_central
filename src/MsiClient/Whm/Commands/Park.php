@@ -23,17 +23,17 @@ class Park extends Command
     {
 
         $send = ['domain' => $subdomain,
-                 'cpanel_jsonapi_module' => 'Park',
-                 'cpanel_jsonapi_func' => 'park',
-                 'cpanel_jsonapi_apiversion' => 2];
+            'cpanel_jsonapi_module' => 'Park',
+            'cpanel_jsonapi_func' => 'park',
+            'cpanel_jsonapi_apiversion' => 2];
 
         if (!empty($send)) {
             $send['topdomain'] = $topDomain;
         }
 
         $retorno = $this->perform($send, \MsiClient\Client::POST_REQUEST, $this->getUrl('cpanel'))->cpanelresult;
-        var_dump($retorno);
-        if (empty($retorno->data)) {
+
+        if (!empty($retorno->error)) {
             throw  new InvalidRequest("Ocorreu um erro na requisição." . $retorno->error);
         }
 
@@ -50,7 +50,7 @@ class Park extends Command
             'cpanel_jsonapi_apiversion' => 2
         ], \MsiClient\Client::POST_REQUEST, $this->getUrl('cpanel'))->cpanelresult;
 
-        if (empty($retorno->data)) {
+        if (!empty($retorno->error)) {
             throw  new InvalidRequest("Ocorreu um erro na requisição." . $retorno->error);
         }
 
@@ -64,12 +64,12 @@ class Park extends Command
             'cpanel_jsonapi_func' => 'listparkeddomains',
             'cpanel_jsonapi_apiversion' => 2
         ], \MsiClient\Client::POST_REQUEST, $this->getUrl('cpanel'))->cpanelresult;
-        var_dump($retorno);exit;
-        if (empty($retorno->data)) {
+
+        if (!$retorno->event->result) {
             throw  new InvalidRequest("Ocorreu um erro na requisição." . $retorno->error);
         }
 
-        return $retorno;
+        return $retorno->data;
     }
 
 }
