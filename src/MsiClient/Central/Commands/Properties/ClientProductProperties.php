@@ -7,6 +7,7 @@
  */
 
 namespace MsiClient\Central\Commands\Properties;
+use MsiClient\Central\Commands\ClientProductConfiguration;
 
 
 /**
@@ -24,6 +25,12 @@ namespace MsiClient\Central\Commands\Properties;
  */
 class ClientProductProperties extends PropertiesAbstract
 {
+
+    public $configs = [];
+
+    public function addConfig(ClientProductConfigurationProperties $configuration) {
+        $this->configs[] = $configuration;
+    }
 
     public function getConfigs() {
         $retorno = [];

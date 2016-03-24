@@ -10,6 +10,7 @@ namespace MsiClient\Central\Commands;
 
 
 use MsiClient\Central\Commands\Properties\ClientProductProperties;
+use MsiClient\Central\Factory\Formatter;
 
 class ClientProduct extends Command
 {
@@ -24,6 +25,30 @@ class ClientProduct extends Command
 
 
             return $clientProduct->fromStdClass($result);
+        } catch (\Exception $e) {
+            throw  $e;
+        }
+    }
+
+    public function save(ClientProductProperties $properties)
+    {
+        try {
+            try {
+                $formatter = Formatter::create(\MsiClient\Client::Formart_Request);
+
+                if (!is_null($properties->id)) {
+                    return $this->perform(
+                        ['data' => $formatter->encode(['client_product' => $properties->toArray()])],
+                        \MsiClient\Client::PUT_REQUEST, $this->getUrl() . '/' . $properties->id);
+                } else {
+                    return $this->perform(
+                        ['data' => $formatter->encode(['client_product' => $properties->toArray()])],
+                        \MsiClient\Client::POST_REQUEST);
+                }
+
+            } catch (\Exception $e) {
+                throw  $e;
+            }
         } catch (\Exception $e) {
             throw  $e;
         }
