@@ -21,6 +21,17 @@ namespace MsiClient\Central\Commands\Properties;
  */
 class ClientProductConfigurationProperties extends PropertiesAbstract
 {
+
+
+    public static function factory($client_product_id, $product_configuration_id, $value) {
+        $retorno = new ClientProductConfigurationProperties();
+        $retorno->client_product_id = $client_product_id;
+        $retorno->product_configuration_id = $product_configuration_id;
+        $retorno->value = $value;
+
+        return $retorno;
+    }
+
     protected function fromJsonElement($elements)
     {
         parent::fromJsonElement($elements);

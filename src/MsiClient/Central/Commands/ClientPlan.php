@@ -17,11 +17,11 @@ class ClientPlan extends Command
 
     public $url = "/client-plan/";
 
-    public function show(ClientPlanProperties $planProperties)
+    public function save(ClientPlanProperties $planProperties)
     {
         try {
             $formatter = Formatter::create(\MsiClient\Client::Formart_Request);
-            $result = $this->perform($formatter->encode(['client_plan' => $planProperties->toArray()]), \MsiClient\Client::GET_REQUEST, $this->getUrl())->data;
+            $result = $this->perform(['client_plan' =>$formatter->encode($planProperties->toArray())], \MsiClient\Client::GET_REQUEST, $this->getUrl())->data;
 
             $plan = new ClientPlanProperties();
             return $plan->fromStdClass($result);
