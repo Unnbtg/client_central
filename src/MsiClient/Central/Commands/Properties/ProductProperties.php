@@ -29,10 +29,14 @@ class ProductProperties extends PropertiesAbstract
         return $retorno;
     }
 
-    public function getConfigValue($name) {
+    /**
+     * @param $name
+     * @return ProductConfigurationProperties
+     */
+    public function getConfig($name) {
         foreach($this->configurations as $configuration) {
             if ($configuration->name == $name) {
-                return $configuration->value;
+                return $configuration;
             }
         }
     }
@@ -48,7 +52,6 @@ class ProductProperties extends PropertiesAbstract
                 $this->configurations[] = $configs->fromJsonElement($value);
             }
         }
-
 
         return $this;
     }

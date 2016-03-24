@@ -21,18 +21,18 @@ abstract class PropertiesAbstract
         return $retorno;
     }
 
-    public function fromStdClass($std) {
+    public function fromStdClass($std)
+    {
         return $this->fromJsonElement($std);
     }
 
-    protected function fromJsonElement($elements) {
-        foreach($elements as $name => $value) {
-
-            if (in_array($name, ['created_at', 'updated_at', 'deleted_at'])) {
+    protected function fromJsonElement($elements)
+    {
+        foreach ($elements as $name => $value) {
+            if (in_array($name, ['created_at', 'updated_at', 'deleted_at']) && is_string($value)) {
                 $this->$name = new \DateTime($value);
                 continue;
             }
-
             $this->$name = $value;
         }
 

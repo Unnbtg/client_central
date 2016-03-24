@@ -16,8 +16,10 @@ namespace MsiClient\Central\Commands\Properties;
  * @property integer $id
  * @property integer $client_id
  * @property integer $user_id
+ * @property integer $product_id
  * @property integer $client_plan_id
  * @property ProductProperties $product
+ * @property ClientProperties $client
  * @property ClientProductConfigurationProperties[] $product_configurations
  */
 class ClientProductProperties extends PropertiesAbstract
@@ -57,13 +59,25 @@ class ClientProductProperties extends PropertiesAbstract
 
         $product = new ProductProperties();
 
-        $this->product = $product->fromJsonElement($elements->product);
+        if (isset($elements->product)){
+            $this->product = $product->fromJsonElement($elements->product);
+        }
+
 
         unset($this->client_configuration);
 
-        foreach($elements->client_configuration as $value ) {
-            $cConfg = new ClientProductConfigurationProperties();
-            $this->product_configurations[] = $cConfg->fromJsonElement($value);
+        if (isset($elements->client_configuration)){
+            foreach($elements->client_configuration as $value ) {
+                $cConfg = new ClientProductConfigurationProperties();
+                $this->product_configurations[] = $cConfg->fromJsonElement($value);
+            }
+        }
+
+
+        if (isset($elements->client)) {
+            unset($this->client);
+            $client = new ClientProperties();
+            $this->client = $client->fromStdClass($elements->client);
         }
 
         return $this;
