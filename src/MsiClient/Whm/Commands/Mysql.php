@@ -181,6 +181,23 @@ class Mysql extends Command
         return $retorno->data[0] != 0;
     }
 
+
+    public function grantAccessHost( $host ) {
+        $retorno = $this->perform([
+            'host' => $host,
+            'cpanel_jsonapi_module' => 'MysqlFE',
+            'cpanel_jsonapi_func' => 'authorizehost',
+            'cpanel_jsonapi_apiversion' => 2
+        ], \MsiClient\Client::POST_REQUEST, $this->getUrl('cpanel'))->cpanelresult;
+
+        var_dump($retorno);
+        if ($retorno->event->result != '1') {
+            throw  new InvalidRequest("Ocorreu um erro na requisição." . $retorno->error);
+        }
+
+        return true;
+    }
+
     private function getPrefix()
     {
         return $this->acc . '_';

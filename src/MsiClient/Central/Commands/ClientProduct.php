@@ -15,15 +15,13 @@ use MsiClient\Central\Factory\Formatter;
 class ClientProduct extends Command
 {
 
-    public $url = "/client-product/";
+    public $url = "/client-product";
 
     public function show($id)
     {
         try {
-            $result = $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl() . $id)->data;
+            $result = $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl() .'/'. $id)->data;
             $clientProduct = new ClientProductProperties();
-
-
             return $clientProduct->fromStdClass($result);
         } catch (\Exception $e) {
             throw  $e;
@@ -32,25 +30,26 @@ class ClientProduct extends Command
 
     public function save(ClientProductProperties $properties)
     {
+
         try {
-            try {
-                $formatter = Formatter::create(\MsiClient\Client::Formart_Request);
+            $formatter = Formatter::create(\MsiClient\Client::Formart_Request);
 
-                if (!is_null($properties->id)) {
-                    return $this->perform(
-                        ['data' => $formatter->encode(['client_product' => $properties->toArray()])],
-                        \MsiClient\Client::PUT_REQUEST, $this->getUrl() . '/' . $properties->id);
-                } else {
-                    return $this->perform(
-                        ['data' => $formatter->encode(['client_product' => $properties->toArray()])],
-                        \MsiClient\Client::POST_REQUEST);
-                }
+            if (!is_null($properties->id)) {
+                $result =  $this->perform(
+                    ['data' => $formatter->encode(['client_product' => $properties->toArray()])],
+                    \MsiClient\Client::PUT_REQUEST, $this->getUrl() . '/' . $properties->id);
+            } else {
 
-            } catch (\Exception $e) {
-                throw  $e;
+                $result = $this->perform(
+                    ['data' => $formatter->encode(['client_product' => $properties->toArray()])],
+                    \MsiClient\Client::POST_REQUEST);
             }
+
+            $clientProduct = new ClientProductProperties();
+            return $clientProduct->fromStdClass($result->data);
         } catch (\Exception $e) {
             throw  $e;
         }
+
     }
 }

@@ -25,6 +25,8 @@ class Client
 
     const PUT_REQUEST = 'PUT';
 
+    const DELETE_REQUEST = 'DELETE';
+
     const Formart_Request = 'application/json';
 
     protected $headers = [];
@@ -67,6 +69,7 @@ class Client
 
     public function makeRequest($url, $type, $params = null, $parse = true, IFormatter $formatter = null)
     {
+
         if ($parse) {
             $query = $this->getQuery($params);
             $params = ['form_params' => $query, 'query' => $query];
@@ -86,6 +89,8 @@ class Client
         if ($type == Client::PUT_REQUEST) {
             $this->headers['headers']['Authorization'] = 'Bearer '. $this->server->getToken()->access_token;
         }
+
+
         $params = array_merge($params, $this->headers);
 
 

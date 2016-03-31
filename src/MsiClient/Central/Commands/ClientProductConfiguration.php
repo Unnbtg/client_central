@@ -42,7 +42,6 @@ class ClientProductConfiguration extends Command
     {
         try {
             $formatter = Formatter::create(\MsiClient\Client::Formart_Request);
-
             return $this->perform(
                 ['data' => $formatter->encode(['client_product_config' => $config])],
                 \MsiClient\Client::PUT_REQUEST, $this->getUrl() . '/update-many');
