@@ -36,8 +36,6 @@ class ClientProductConfigurationProperties extends PropertiesAbstract
     {
         parent::fromJsonElement($elements);
 
-
-
         if (isset($elements->product_configuration)) {
             $productConfiguration = new ProductConfigurationProperties();
             $this->product_configuration  = $productConfiguration->fromJsonElement($elements->product_configuration);

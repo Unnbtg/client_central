@@ -25,7 +25,7 @@ use MsiClient\Central\Commands\ClientProductConfiguration;
  */
 class ClientProductProperties extends PropertiesAbstract
 {
-
+    public $id = null;
     public $configs = [];
 
     public function addConfig(ClientProductConfigurationProperties $configuration) {
@@ -45,7 +45,10 @@ class ClientProductProperties extends PropertiesAbstract
     public function getConfigValue($name) {
 
         $config = $this->getConfig($name);
-        return $config->value;
+        if (!empty($config)){
+            return $config->value;
+        }
+        return null;
     }
 
     /**
@@ -79,7 +82,6 @@ class ClientProductProperties extends PropertiesAbstract
                 $this->product_configurations[] = $cConfg->fromJsonElement($value);
             }
         }
-
 
         if (isset($elements->client)) {
             unset($this->client);

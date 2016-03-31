@@ -70,6 +70,7 @@ class Server
 
         try {
             $response = $client->request($type, $url, $params);
+
             return $this->_parse($response);
 
         } catch (ClientException $e) {

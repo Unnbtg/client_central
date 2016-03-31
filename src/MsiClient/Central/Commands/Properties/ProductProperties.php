@@ -53,6 +53,7 @@ class ProductProperties extends PropertiesAbstract
             }
         }
 
+
         return $this;
     }
 

@@ -18,17 +18,19 @@ class BranchUser extends Command
 {
     public $url = "/branch-user";
 
-    public  function save(BranchUserProperties $branch) {
+    public function save(BranchUserProperties $branch)
+    {
 
         try {
             $formatter = Formatter::create(\MsiClient\Client::Formart_Request);
-
-            return $this->perform(
-                ['data' => $formatter->encode(['branch' => $branch->toArray()])],
+            $retorno = $this->perform(
+                ['data' => $formatter->encode(['branch-user' => $branch->toArray()])],
                 \MsiClient\Client::POST_REQUEST
             );
-        } catch (\Exception $e){
-            throw  $e;
+
+            return $retorno;
+        } catch (\Exception $e) {
+            echo $e->getMessage();
         }
 
     }
