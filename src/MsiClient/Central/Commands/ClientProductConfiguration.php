@@ -25,12 +25,11 @@ class ClientProductConfiguration extends Command
 
             return $this->perform(
                 ['data' => $formatter->encode(['client_product_config' => $config->toArray()])],
-                \MsiClient\Client::PUT_REQUEST, $this->getUrl() . '/' .  $config->client_product_id. '-'. $config->product_configuration_id);
+                \MsiClient\Client::PUT_REQUEST, $this->getUrl() . '/' . $config->client_product_id . '-' . $config->product_configuration_id);
 
         } catch (\Exception $e) {
             throw  $e;
         }
-
     }
 
     /**

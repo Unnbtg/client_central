@@ -35,7 +35,6 @@ abstract class Command
     {
         $this->client = $client;
     }
-
     /**
      * Perform what the command is intended to do.
      * @param mixed $params An array with the values the command need to do the action.

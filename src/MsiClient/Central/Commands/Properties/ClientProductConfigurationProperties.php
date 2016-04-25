@@ -23,7 +23,8 @@ class ClientProductConfigurationProperties extends PropertiesAbstract
 {
 
 
-    public static function factory($client_product_id, $product_configuration_id, $value) {
+    public static function factory($client_product_id, $product_configuration_id, $value)
+    {
         $retorno = new ClientProductConfigurationProperties();
         $retorno->client_product_id = $client_product_id;
         $retorno->product_configuration_id = $product_configuration_id;
@@ -38,7 +39,7 @@ class ClientProductConfigurationProperties extends PropertiesAbstract
 
         if (isset($elements->product_configuration)) {
             $productConfiguration = new ProductConfigurationProperties();
-            $this->product_configuration  = $productConfiguration->fromJsonElement($elements->product_configuration);
+            $this->product_configuration = $productConfiguration->fromJsonElement($elements->product_configuration);
         }
 
         return $this;

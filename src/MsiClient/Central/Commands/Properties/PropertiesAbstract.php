@@ -10,7 +10,6 @@ namespace MsiClient\Central\Commands\Properties;
 
 abstract class PropertiesAbstract
 {
-
     public function toArray()
     {
         $retorno = [];

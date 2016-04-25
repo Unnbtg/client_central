@@ -15,8 +15,7 @@ class Plan extends Command
 {
 
     public $url = '/plan';
-
-
+    
     public function getPlans($page = null)
     {
         try {
@@ -30,7 +29,7 @@ class Plan extends Command
     {
         try {
 
-            $retorno = $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl().'/'. $id);
+            $retorno = $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl() . '/' . $id);
 
             $plan = new PlanProperties();
             return $plan->fromStdClass($retorno);

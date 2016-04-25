@@ -26,7 +26,7 @@ class ClientPlan extends Command
     {
         try {
             $formatter = Formatter::create(\MsiClient\Client::Formart_Request);
-            $result = $this->perform(['data' =>$formatter->encode(['client_plan' =>$planProperties->toArray()])], \MsiClient\Client::POST_REQUEST, $this->getUrl())->data;
+            $result = $this->perform(['data' => $formatter->encode(['client_plan' => $planProperties->toArray()])], \MsiClient\Client::POST_REQUEST, $this->getUrl())->data;
 
             $plan = new ClientPlanProperties();
             return $plan->fromStdClass($result);
@@ -35,14 +35,15 @@ class ClientPlan extends Command
         }
     }
 
-    public function find($id = null) {
+    public function find($id = null)
+    {
 
         try {
 
             if (is_null($id)) {
                 $result = $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl())->data;
             } else {
-                $result = $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl() .'/'. $id)->data;
+                $result = $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl() . '/' . $id)->data;
             }
 
             $plan = new ClientPlanProperties();

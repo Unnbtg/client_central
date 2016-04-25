@@ -7,6 +7,7 @@
  */
 
 namespace MsiClient\Central\Commands\Properties;
+
 use MsiClient\Central\Commands\ClientProductConfiguration;
 
 
@@ -28,24 +29,27 @@ class ClientProductProperties extends PropertiesAbstract
     public $id = null;
     public $configs = [];
 
-    public function addConfig(ClientProductConfigurationProperties $configuration) {
+    public function addConfig(ClientProductConfigurationProperties $configuration)
+    {
         $this->configs[] = $configuration;
     }
 
-    public function getConfigs() {
+    public function getConfigs()
+    {
         $retorno = [];
 
-        foreach($this->product->configurations as $config) {
+        foreach ($this->product->configurations as $config) {
             $retorno[] = $config->name;
         }
 
         return $retorno;
     }
 
-    public function getConfigValue($name) {
+    public function getConfigValue($name)
+    {
 
         $config = $this->getConfig($name);
-        if (!empty($config)){
+        if (!empty($config)) {
             return $config->value;
         }
         return null;
@@ -55,8 +59,9 @@ class ClientProductProperties extends PropertiesAbstract
      * @param $name
      * @return ClientProductConfigurationProperties
      */
-    public function getConfig($name) {
-        foreach($this->product_configurations as $config) {
+    public function getConfig($name)
+    {
+        foreach ($this->product_configurations as $config) {
             if ($config->product_configuration->name == $name) {
                 return $config;
             }
@@ -69,15 +74,15 @@ class ClientProductProperties extends PropertiesAbstract
 
         $product = new ProductProperties();
 
-        if (isset($elements->product)){
+        if (isset($elements->product)) {
             $this->product = $product->fromJsonElement($elements->product);
         }
 
 
         unset($this->client_configuration);
 
-        if (isset($elements->client_configuration)){
-            foreach($elements->client_configuration as $value ) {
+        if (isset($elements->client_configuration)) {
+            foreach ($elements->client_configuration as $value) {
                 $cConfg = new ClientProductConfigurationProperties();
                 $this->product_configurations[] = $cConfg->fromJsonElement($value);
             }

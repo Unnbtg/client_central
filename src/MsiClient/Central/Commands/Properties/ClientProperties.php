@@ -128,7 +128,7 @@ class ClientProperties extends PropertiesAbstract
     public $same_address;
 
     /**
-     * @var string$clientId, $configName, $product_id, $value
+     * @var string $clientId , $configName, $product_id, $value
      */
     public $billing_cep;
 
@@ -189,7 +189,8 @@ class ClientProperties extends PropertiesAbstract
         4 => 'pré cliente'
     ];
 
-    public function replicateAddress() {
+    public function replicateAddress()
+    {
         $this->billing_address = $this->address;
         $this->billing_cep = $this->cep;
         $this->billing_city = $this->city;
