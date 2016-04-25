@@ -15,8 +15,7 @@ use MsiClient\Token;
 
 class Login extends Command implements ILogin
 {
-
-
+    
     protected $url = '/oauth/access_token';
 
     public function getAccessToken($grant_type, $client_secret, $client_id, $preserve = false)

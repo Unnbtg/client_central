@@ -21,7 +21,8 @@ namespace MsiClient\Central\Commands\Properties;
 class ClientPlanProperties extends ProductConfigurationProperties
 {
 
-    public function addConfig($productConfigurationId, $value, $productId) {
+    public function addConfig($productConfigurationId, $value, $productId)
+    {
         $this->configs[] = [
             "product_configuration_id" => $productConfigurationId,
             "value" => $value,
@@ -51,7 +52,7 @@ class ClientPlanProperties extends ProductConfigurationProperties
         if (isset($elements->client_products)) {
             unset($this->client_products);
 
-            foreach($elements->client_products as $client_product){
+            foreach ($elements->client_products as $client_product) {
                 $cProducts = new ClientProductProperties();
                 $cProducts->fromJsonElement($client_product);
                 $this->client_products[] = $cProducts;

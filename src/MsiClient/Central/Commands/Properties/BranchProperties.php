@@ -23,24 +23,23 @@ namespace MsiClient\Central\Commands\Properties;
  * @property string $neighborhood
  * @property string $city
  * @property string $uf
- * @property int    $status
+ * @property int $status
  * @property string $obs
- * @property int    $client_id
+ * @property int $client_id
  */
 
 class BranchProperties extends PropertiesAbstract
 {
-    public  $id;
-    public  $name;
-    public  $filial;
-    public  $cep;
-    public  $address;
-    public  $number;
-    public  $complement;
-    public  $neighborhood;
-    public  $city;
-    public  $uf;
-    public  $status;
-    public  $obs;
-    public  $client_id;
+    public $id;
+    public $name;
+    public $filial;
+    public $cep;
+    public $address;
+    public $number;
+    public $complement;
+    public $neighborhood;
+    public $city;
+    public $uf;
+    public $status;
+    public $obs;
 }

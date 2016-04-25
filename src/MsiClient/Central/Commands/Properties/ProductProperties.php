@@ -20,9 +20,10 @@ namespace MsiClient\Central\Commands\Properties;
 class ProductProperties extends PropertiesAbstract
 {
 
-    public function getCongifs() {
+    public function getCongifs()
+    {
         $retorno = [];
-        foreach( $this->configurations as $configurationProperties) {
+        foreach ($this->configurations as $configurationProperties) {
             $retorno[] = $configurationProperties->name;
         }
 
@@ -33,8 +34,9 @@ class ProductProperties extends PropertiesAbstract
      * @param $name
      * @return ProductConfigurationProperties
      */
-    public function getConfig($name) {
-        foreach($this->configurations as $configuration) {
+    public function getConfig($name)
+    {
+        foreach ($this->configurations as $configuration) {
             if ($configuration->name == $name) {
                 return $configuration;
             }

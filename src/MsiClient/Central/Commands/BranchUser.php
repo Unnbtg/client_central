@@ -9,7 +9,6 @@
 namespace MsiClient\Central\Commands;
 
 
-use MsiClient\Central\Commands\Properties\BranchProperties;
 use MsiClient\Central\Commands\Properties\BranchUserProperties;
 use MsiClient\Central\Factory\Formatter;
 
@@ -20,18 +19,19 @@ class BranchUser extends Command
 
     public function save(BranchUserProperties $branch)
     {
+        $formatter = Formatter::create(\MsiClient\Client::Formart_Request);
+        $retorno = $this->perform(
+            ['data' => $formatter->encode(['branch-user' => $branch->toArray()])],
+            \MsiClient\Client::POST_REQUEST
+        );
 
-        try {
-            $formatter = Formatter::create(\MsiClient\Client::Formart_Request);
-            $retorno = $this->perform(
-                ['data' => $formatter->encode(['branch-user' => $branch->toArray()])],
-                \MsiClient\Client::POST_REQUEST
-            );
+        return $retorno;
+    }
 
-            return $retorno;
-        } catch (\Exception $e) {
-            echo $e->getMessage();
-        }
-
+    public function show($id)
+    {
+        $retorno = $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl() . '/' . $id);
+        $user = new BranchUserProperties();
+        return $user->fromStdClass($retorno->data);
     }
 }

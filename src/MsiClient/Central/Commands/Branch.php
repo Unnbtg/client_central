@@ -28,7 +28,7 @@ class Branch extends Command
 
             return $branch->fromStdClass($retorno->branch);
 
-        } catch (\Exception $e){
+        } catch (\Exception $e) {
             throw  $e;
         }
     }
@@ -37,7 +37,7 @@ class Branch extends Command
     public function find($id)
     {
         try {
-            $retorno = $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl().'/'. $id );
+            $retorno = $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl() . '/' . $id);
             $branch = new BranchProperties();
             return $branch->fromStdClass($retorno->branch);
 
@@ -49,7 +49,7 @@ class Branch extends Command
     public function delete($id)
     {
         try {
-            return $this->perform([], \MsiClient\Client::DELETE_REQUEST, $this->getUrl().'/'. $id );
+            return $this->perform([], \MsiClient\Client::DELETE_REQUEST, $this->getUrl() . '/' . $id);
         } catch (\Exception $e) {
             throw  $e;
         }

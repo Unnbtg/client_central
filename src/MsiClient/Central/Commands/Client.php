@@ -44,6 +44,7 @@ class Client extends Command
             throw  $e;
         }
     }
+    
 
     public function getClient($code)
     {
