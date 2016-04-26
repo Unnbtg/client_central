@@ -33,6 +33,15 @@ class Branch extends Command
         }
     }
 
+    public function getByClientId($id)
+    {
+        try {
+            $retorno = $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl() . '/by-client/' . $id);
+            return $retorno->branch;
+        } catch (\Exception $e) {
+            throw  $e;
+        }
+    }
 
     public function find($id)
     {
