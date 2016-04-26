@@ -182,6 +182,16 @@ class ClientProperties extends PropertiesAbstract
      */
     public $billing_uf;
 
+    /**
+     * @var string
+     */
+    public $purchase_date;
+
+    /**
+     * @var string
+     */
+    public $desktop_code;
+
     public static $statusToText = [
         1 => 'ativo',
         2 => 'suspenso',
