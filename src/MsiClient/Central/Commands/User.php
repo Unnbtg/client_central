@@ -8,6 +8,7 @@
 
 namespace MsiClient\Central\Commands;
 
+
 class User extends Command
 {
     public $url = '/user';

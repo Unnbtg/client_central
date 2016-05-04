@@ -38,5 +38,13 @@ abstract class PropertiesAbstract
         return $this;
     }
 
+    public function __get($name)
+    {
+        if (!isset($this->$name)) {
+            return null;
+        }
+
+        return $this->$name;
+    }
 
 }
