@@ -13,6 +13,7 @@ use MsiClient\Central\Factory\Formatter;
 
 class Client extends Command
 {
+
     public $url = '/client';
 
     public function save(ClientProperties $client)
@@ -33,7 +34,6 @@ class Client extends Command
         } catch (\Exception $e) {
             throw  $e;
         }
-
     }
 
     public function listAll($page)
@@ -44,7 +44,14 @@ class Client extends Command
             throw  $e;
         }
     }
-    
+
+    public function dataTable($array) {
+        try {
+            return $this->perform($array, \MsiClient\Client::GET_REQUEST, $this->getUrl(). '/datatable');
+        } catch (\Exception $e) {
+            throw  $e;
+        }
+    }
 
     public function getClient($code)
     {
