@@ -70,4 +70,13 @@ class Client extends Command
             throw  $e;
         }
     }
+
+    public function listAllCodes()
+    {
+        try {
+            return $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl() . '/codes/');
+        } catch (\Exception $e) {
+            throw  $e;
+        }
+    }
 }
