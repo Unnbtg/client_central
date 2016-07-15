@@ -12,4 +12,6 @@ namespace MsiClient\Central\Exception;
 class General extends \Exception
 {
 
+    const WRONG_DATA = 20;
+
 }
