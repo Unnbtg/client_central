@@ -8,7 +8,7 @@
 
 namespace MsiClient\Central\Commands\Properties;
 
-abstract class PropertiesAbstract
+abstract class PropertiesAbstract implements Sendable
 {
     public function toArray()
     {
@@ -47,4 +47,7 @@ abstract class PropertiesAbstract
         return $this->$name;
     }
 
+    public function getContainer() {
+        return "";
+    }
 }

@@ -27,11 +27,11 @@ class SciOnline extends Command
     public function setConfig(ProductConfigurationProperties $config)
     {
         try {
-            $formatter = Formatter::create(\MsiClient\Client::Formart_Request);
+            $formatter = Formatter::create(Client::Formart_Request);
 
             return $this->perform(
                 ['data' => $formatter->encode(['sci-online' => $config->toArray()])],
-                \MsiClient\Client::POST_REQUEST, $this->getUrl() . '/set-config');
+                Client::POST_REQUEST, $this->getUrl() . '/set-config');
         } catch (\Exception $e) {
             throw  $e;
         }
