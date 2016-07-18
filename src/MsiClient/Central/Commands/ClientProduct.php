@@ -11,6 +11,7 @@ namespace MsiClient\Central\Commands;
 
 use MsiClient\Central\Commands\Properties\ClientProductProperties;
 use MsiClient\Central\Factory\Formatter;
+use MsiClient\Client;
 
 class ClientProduct extends Command
 {
@@ -20,7 +21,7 @@ class ClientProduct extends Command
     public function show($id)
     {
         try {
-            $result = $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl() . '/' . $id)->data;
+            $result = $this->perform([], Client::GET_REQUEST, $this->getUrl() . '/' . $id)->data;
             $clientProduct = new ClientProductProperties();
             return $clientProduct->fromStdClass($result);
         } catch (\Exception $e) {
@@ -32,17 +33,17 @@ class ClientProduct extends Command
     {
 
         try {
-            $formatter = Formatter::create(\MsiClient\Client::Formart_Request);
+            $formatter = Formatter::create(Client::Formart_Request);
 
             if (!is_null($properties->id)) {
                 $result = $this->perform(
                     ['data' => $formatter->encode(['client_product' => $properties->toArray()])],
-                    \MsiClient\Client::PUT_REQUEST, $this->getUrl() . '/' . $properties->id);
+                    Client::PUT_REQUEST, $this->getUrl() . '/' . $properties->id);
             } else {
 
                 $result = $this->perform(
                     ['data' => $formatter->encode(['client_product' => $properties->toArray()])],
-                    \MsiClient\Client::POST_REQUEST);
+                    Client::POST_REQUEST);
             }
 
             $clientProduct = new ClientProductProperties();

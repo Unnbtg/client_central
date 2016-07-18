@@ -8,7 +8,7 @@
 
 namespace MsiClient\Central\Commands;
 
-
+use MsiClient\Client;
 class User extends Command
 {
     public $url = '/user';
@@ -16,7 +16,7 @@ class User extends Command
     public function getVendor()
     {
         try {
-            return $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl() . '/vendor');
+            return $this->perform([], Client::GET_REQUEST, $this->getUrl() . '/vendor');
         } catch (\Exception $e) {
             throw  $e;
         }
@@ -25,7 +25,7 @@ class User extends Command
     public function getCustomer()
     {
         try {
-            return $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl() . '/customer');
+            return $this->perform([], Client::GET_REQUEST, $this->getUrl() . '/customer');
         } catch (\Exception $e) {
             throw  $e;
         }
