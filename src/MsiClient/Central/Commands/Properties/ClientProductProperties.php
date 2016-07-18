@@ -47,7 +47,6 @@ class ClientProductProperties extends PropertiesAbstract
 
     public function getConfigValue($name)
     {
-
         $config = $this->getConfig($name);
         if (!empty($config)) {
             return $config->value;
@@ -66,6 +65,8 @@ class ClientProductProperties extends PropertiesAbstract
                 return $config;
             }
         }
+
+        return new ClientProductConfigurationProperties();
     }
 
     protected function fromJsonElement($elements)
@@ -73,14 +74,14 @@ class ClientProductProperties extends PropertiesAbstract
         parent::fromJsonElement($elements);
 
         $product = new ProductProperties();
-
+        $this->product = [];
         if (isset($elements->product)) {
             $this->product = $product->fromJsonElement($elements->product);
         }
 
 
         unset($this->client_configuration);
-
+        $this->product_configurations = [];
         if (isset($elements->client_configuration)) {
             foreach ($elements->client_configuration as $value) {
                 $cConfg = new ClientProductConfigurationProperties();
@@ -90,6 +91,7 @@ class ClientProductProperties extends PropertiesAbstract
 
         if (isset($elements->client)) {
             unset($this->client);
+            $this->client = [];
             $client = new ClientProperties();
             $this->client = $client->fromStdClass($elements->client);
         }
