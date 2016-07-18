@@ -8,6 +8,7 @@
 namespace MsiClient\Central\Commands;
 
 use MsiClient\Central\Commands\Properties\ProductProperties;
+use MsiClient\Client;
 
 class Products extends Command
 {

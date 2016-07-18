@@ -10,6 +10,7 @@ namespace MsiClient\Central\Commands;
 
 use MsiClient\Central\Commands\Properties\ProductConfigurationProperties;
 use MsiClient\Central\Factory\Formatter;
+use MsiClient\Client;
 
 class SciOnline extends Command
 {

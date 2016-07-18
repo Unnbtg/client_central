@@ -34,7 +34,7 @@ class PlanProperties extends PropertiesAbstract
 
 
         unset($this->products);
-
+        $this->products = [];
         foreach ($elements->products as $product) {
             $pProduct = new ProductProperties();
             $this->products[] = $pProduct->fromStdClass($product);
