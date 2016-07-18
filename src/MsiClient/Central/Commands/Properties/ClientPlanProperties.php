@@ -23,6 +23,9 @@ class ClientPlanProperties extends ProductConfigurationProperties
 
     public function addConfig($productConfigurationId, $value, $productId)
     {
+        if (!isset($this->configs)) {
+            $this->configs = [];
+        }
         $this->configs[] = [
             "product_configuration_id" => $productConfigurationId,
             "value" => $value,
@@ -51,6 +54,7 @@ class ClientPlanProperties extends ProductConfigurationProperties
 
         if (isset($elements->client_products)) {
             unset($this->client_products);
+            $this->client_products = [];
 
             foreach ($elements->client_products as $client_product) {
                 $cProducts = new ClientProductProperties();

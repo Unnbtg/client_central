@@ -155,7 +155,8 @@
         /**
          * @return Token
          */
-        public function getToken() {
+        public function getToken()
+        {
             return $this->server->getToken();
         }
 

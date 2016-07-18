@@ -75,11 +75,7 @@ class Token
          */
         $obj = unserialize(file_get_contents($path));
 
-        if ($obj->preserve) {
-            return $obj;
-        }
-
-        if (!$obj->expired()) {
+        if ($obj->preserve && !$obj->expired()) {
             return $obj;
         }
 
