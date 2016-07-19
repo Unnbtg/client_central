@@ -41,8 +41,7 @@ abstract class Command
 
     public function makeRequest($url, $type, $params = null, $parse = true)
     {
-        $this->params = array_merge($params, $this->params);
-        return $this->client->makeRequest($url, $type, $this->params, $parse, $this->formatter);
+        return $this->client->makeRequest($url, $type, array_merge($params, $this->params), $parse, $this->formatter);
     }
 
     public function getUrl($uri)
