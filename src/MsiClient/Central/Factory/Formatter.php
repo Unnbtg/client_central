@@ -8,17 +8,15 @@
 
 namespace MsiClient\Central\Factory;
 
-
 use MsiClient\Central\Formatter\IFormatter;
 use MsiClient\Central\Formatter\Json;
+use MsiClient\Central\Formatter\Xml;
 
 class Formatter
 {
-
-
-
     private static $fomatters = [
-      'application/json' => Json::class
+        'application/json' => Json::class,
+        'application/xml' => Xml::class,
     ];
 
     /***
@@ -28,8 +26,8 @@ class Formatter
      * @param string $name ContentType that you want a formatter for.
      * @return IFormatter
      */
-    public static function create($name) {
-
+    public static function create($name)
+    {
         if (!isset(self::$fomatters[$name])) {
             return null;
         }

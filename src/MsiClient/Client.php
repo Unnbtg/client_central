@@ -29,6 +29,8 @@
 
         const Formart_Request = 'application/json';
 
+        const Mysuite_Request = 'application/xml';
+
         protected $headers = [];
 
         /**
@@ -45,12 +47,10 @@
             $this->server = $server;
         }
 
-
         public function getHost()
         {
             return $this->server->getHost();
         }
-
 
         protected function getQuery($params = null)
         {
@@ -94,11 +94,9 @@
 
             $params = array_merge($params, $this->headers);
 
-
             if ($formatter == null) {
                 return $this->server->callApi($type, $url, $params);
             }
-
             return $formatter->decode($this->server->callApi($type, $url, $params));
         }
 

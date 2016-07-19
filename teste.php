@@ -13,6 +13,15 @@ include_once 'vendor/autoload.php';
 
 
 try {
+    /*$server = new \MsiClient\Server("http://microsistec.mysuite.com.br/webservices/");
+
+    $clientApi = new \MsiClient\Client($server);
+
+    $mysuite = new \MsiClient\Mysuite\Company();
+    $mysuite->setClient($clientApi);
+    $mysuite->setMysuiteAuth('mcs', 'ccd2e1fe11a04cb8c31b8295c03d74d7');
+    var_dump($mysuite->get(133));exit;*/
+
 
     /*$server = new \MsiClient\Server("https://192.168.0.138:2087/json-api/");
 
@@ -149,7 +158,7 @@ try {
 
     var_dump($park->listPark());*/
 
-    $server = new \MsiClient\Server( 'http://api.central.local');
+    $server = new \MsiClient\Server( 'http://api.central_v2.local');
     $cliente = new \MsiClient\Client($server);
 
     $login = new \MsiClient\Central\Commands\Login();
