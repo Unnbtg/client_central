@@ -14,6 +14,10 @@ abstract class Command
 
     protected $params = [];
 
+    protected $sigla;
+
+    protected $pass;
+
     private $formatter;
 
     public function __construct()
@@ -33,15 +37,24 @@ abstract class Command
 
     public function setMysuiteAuth($sigla, $pass)
     {
-        $this->params = [
-            'sigla' => $sigla,
-            'servicekey' => md5($sigla . $pass)
+        $this->sigla = $sigla;
+        $this->pass = $pass;
+    }
+
+    public function getMysuiteAuth()
+    {
+        return [
+            'sigla' => $this->sigla,
+            'pass'  => $this->pass
         ];
     }
 
-    public function makeRequest($url, $type, $params = null, $parse = true)
+    public function makeRequest($url, $type, $params = null, $parse = true, $formatter = true)
     {
-        return $this->client->makeRequest($url, $type, array_merge($params, $this->params), $parse, $this->formatter);
+        if(!$formatter){
+            $this->formatter = null;
+        }
+        return $this->client->makeRequest($url, $type, $params, $parse, $this->formatter);
     }
 
     public function getUrl($uri)
