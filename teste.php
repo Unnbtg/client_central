@@ -13,14 +13,33 @@ include_once 'vendor/autoload.php';
 
 
 try {
-    /*$server = new \MsiClient\Server("http://microsistec.mysuite.com.br/webservices/");
+    $server = new \MsiClient\Server("http://microsistec.mysuite.com.br/webservices/");
 
     $clientApi = new \MsiClient\Client($server);
 
     $mysuite = new \MsiClient\Mysuite\Company();
     $mysuite->setClient($clientApi);
     $mysuite->setMysuiteAuth('mcs', 'ccd2e1fe11a04cb8c31b8295c03d74d7');
-    var_dump($mysuite->get(133));exit;*/
+
+    $empresa = [
+        'id'           => '99999',
+        'code'         => 'u7777',
+        'name'         => 'Empresa teste com acentuação',
+        'cpf_cnpj'     => '12.345.678/00001-50',
+        'address'      => 'Endereço teste',
+        'number'       => '200',
+        'neighborhood' => 'Bairro teste com acentuação',
+        'city'         => 'Cidade teste com acentuação',
+        'uf'           => 'SP',
+        'cep'          => '11704-600',
+        'company_name' => 'Razão Social Teste',
+        'phone1'       => '(13) 3474-1818',
+        'phone2'       => '(13) 3495-1999',
+        'status'       => '1',
+    ];
+
+
+    var_dump($mysuite->show(113));exit;
 
 
     /*$server = new \MsiClient\Server("https://192.168.0.138:2087/json-api/");
