@@ -14,7 +14,6 @@
     use MsiClient\Central\Exception\General;
     use MsiClient\Central\Exception\Server;
     use MsiClient\Central\Factory\Formatter;
-    use MsiClient\Client;
 
     abstract class Command
     {
@@ -36,7 +35,7 @@
         /**
          * @param Client $client
          */
-        public function setClient(Client $client)
+        public function setClient(\MsiClient\Client $client)
         {
             $this->client = $client;
         }
@@ -65,7 +64,7 @@
 
                 return $this->client->makeRequest($url, $typeRequest, $params);
             } catch (Server $e) {
-                echo ($e->getMessage());
+                echo($e->getMessage());
                 exit;
                 $response = $e->parsedResponse;
                 echo $e->parsedResponse;

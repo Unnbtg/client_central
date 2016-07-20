@@ -1,58 +1,61 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: marco
- * Date: 22/03/16
- * Time: 10:48
- */
-
-namespace MsiClient\Central\Commands;
-
-
-use MsiClient\Central\Commands\Properties\ClientPlanProperties;
-use MsiClient\Central\Factory\Formatter;
-use MsiClient\Client;
-
-class ClientPlan extends Command
-{
-
-    public $url = "/client-plan";
-
     /**
-     * @param ClientPlanProperties $planProperties
-     * @return Properties\ClientPlanProperties
-     * @throws \Exception
+     * Created by PhpStorm.
+     * User: marco
+     * Date: 22/03/16
+     * Time: 10:48
      */
-    public function save(ClientPlanProperties $planProperties)
-    {
-        try {
-            $formatter = Formatter::create(\MsiClient\Client::Formart_Request);
-            $result = $this->perform(['data' => $formatter->encode(['client_plan' => $planProperties->toArray()])], \MsiClient\Client::POST_REQUEST, $this->getUrl())->data;
 
-            $plan = new ClientPlanProperties();
-            return $plan->fromStdClass($result);
-        } catch (\Exception $e) {
-            throw  $e;
-        }
-    }
+    namespace MsiClient\Central\Commands;
 
-    public function find($id = null)
+
+    use MsiClient\Central\Commands\Properties\ClientPlanProperties;
+    use MsiClient\Central\Factory\Formatter;
+
+
+    class ClientPlan extends Command
     {
 
-        try {
+        public $url = "/client-plan";
 
-            if (is_null($id)) {
-                $result = $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl())->data;
-            } else {
-                $result = $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl() . '/' . $id)->data;
+        /**
+         * @param ClientPlanProperties $planProperties
+         *
+         * @return Properties\ClientPlanProperties
+         * @throws \Exception
+         */
+        public function save(ClientPlanProperties $planProperties)
+        {
+            try {
+                $formatter = Formatter::create(\MsiClient\Client::Formart_Request);
+                $result = $this->perform(['data' => $formatter->encode(['client_plan' => $planProperties->toArray()])],
+                    \MsiClient\Client::POST_REQUEST, $this->getUrl())->data;
+
+                $plan = new ClientPlanProperties();
+
+                return $plan->fromStdClass($result);
+            } catch (\Exception $e) {
+                throw  $e;
             }
+        }
 
-            $plan = new ClientPlanProperties();
+        public function find($id = null)
+        {
 
-            return $plan->fromStdClass($result);
+            try {
 
-        } catch (\Exception $e) {
-            throw  $e;
+                if (is_null($id)) {
+                    $result = $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl())->data;
+                } else {
+                    $result = $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl() . '/' . $id)->data;
+                }
+
+                $plan = new ClientPlanProperties();
+
+                return $plan->fromStdClass($result);
+
+            } catch (\Exception $e) {
+                throw  $e;
+            }
         }
     }
-}

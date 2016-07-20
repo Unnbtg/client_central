@@ -10,7 +10,7 @@ namespace MsiClient\Central\Commands;
 
 use MsiClient\Central\Commands\Properties\BranchProperties;
 use MsiClient\Central\Factory\Formatter;
-use MsiClient\Client;
+
 
 class Branch extends Command
 {

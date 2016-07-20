@@ -9,7 +9,6 @@
     namespace MsiClient\Central\Commands;
 
     use MsiClient\Central\Commands\Properties\ServerProperties;
-    use MsiClient\Client;
 
 
     /**
