@@ -12,7 +12,6 @@
     use GuzzleHttp\Client;
     use GuzzleHttp\Exception\ClientException;
     use GuzzleHttp\Exception\ServerException;
-    use GuzzleHttp\Psr7\Response;
     use MsiClient\Central\Factory\Formatter;
     use Psr\Http\Message\ResponseInterface;
 
@@ -71,8 +70,8 @@
 
             try {
 
-                if ($type == \MsiClient\Client::GET_REQUEST && isset($params['form_data'])) {
-                    unset($params['form_data']);
+                if ($type == \MsiClient\Client::GET_REQUEST && isset($params['form_params'])) {
+                    unset($params['form_params']);
                 }
 
                 $response = $client->request($type, $url, $params);
