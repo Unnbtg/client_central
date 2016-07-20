@@ -70,20 +70,23 @@
             $client = new Client();
 
             try {
+
+                if ($type == \MsiClient\Client::GET_REQUEST && isset($params['form_data'])) {
+                    unset($params['form_data']);
+                }
+
                 $response = $client->request($type, $url, $params);
 
                 return $this->_parse($response);
 
             } catch (ClientException $e) {
                 throw new \MsiClient\Central\Exception\Server($e->getResponse()->getBody(), $e->getCode(),
-                                                              $this->_parse($e->getResponse()), $e->getResponse(),
-                                                              $e->getRequest(), $e);
+                    $this->_parse($e->getResponse()), $e->getResponse(), $e->getRequest(), $e);
             } catch (\ErrorException $e) {
                 throw new \MsiClient\Central\Exception\Server($e->getMessage(), $e->getCode(), null, null, null, $e);
             } catch (ServerException $e) {
                 throw new \MsiClient\Central\Exception\Server($e->getResponse()->getBody(), $e->getCode(),
-                                                              $this->_parse($e->getResponse()), $e->getResponse(),
-                                                              $e->getRequest(), $e);
+                    $this->_parse($e->getResponse()), $e->getResponse(), $e->getRequest(), $e);
             } catch (\Exception $e) {
                 throw new \MsiClient\Central\Exception\Server($e->getMessage(), $e->getCode(), null, null, null, $e);
             }
