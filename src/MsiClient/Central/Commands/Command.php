@@ -111,7 +111,7 @@
 
         protected function getSendData(PropertiesAbstract $type)
         {
-            $formatter = Formatter::create(Client::Formart_Request);
+            $formatter = Formatter::create(\MsiClient\Client::Formart_Request);
 
             return [
                 'data' => $formatter->encode([$type->getContainer() => $type->toArray()]),
@@ -132,7 +132,7 @@
 
         protected function listRequest($url, PropertiesAbstract $propertiesAbstract)
         {
-            $response = $this->perform([], Client::GET_REQUEST, $url)->data;
+            $response = $this->perform([], \MsiClient\Client::GET_REQUEST, $url)->data;
 
             $collection = [];
             foreach ($response as $item) {
@@ -144,7 +144,7 @@
 
         protected function showRequest($url, PropertiesAbstract $propertiesAbstract)
         {
-            $response = $this->perform([], Client::GET_REQUEST, $url)->data;
+            $response = $this->perform([], \MsiClient\Client::GET_REQUEST, $url)->data;
 
             return $propertiesAbstract->fromStdClass($response);
         }

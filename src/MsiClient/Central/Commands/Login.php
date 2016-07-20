@@ -25,7 +25,7 @@ class Login extends Command implements ILogin
                 'grant_type' => $grant_type,
                 'client_secret' => $client_secret,
                 'client_id' => $client_id
-            ], Client::POST_REQUEST);
+            ], \MsiClient\Client::POST_REQUEST);
 
             $token = new Token();
 

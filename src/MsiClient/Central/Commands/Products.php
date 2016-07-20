@@ -18,7 +18,7 @@ class Products extends Command
     public function getStatus($clientId)
     {
         try {
-            return $this->perform([], Client::GET_REQUEST, $this->getUrl() . '/status/' . $clientId);
+            return $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl() . '/status/' . $clientId);
         } catch (\Exception $e) {
             throw  $e;
         }
@@ -27,7 +27,7 @@ class Products extends Command
     public function getAll()
     {
         try {
-            return $this->perform([], Client::GET_REQUEST, $this->getUrl());
+            return $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl());
         } catch (\Exception $e) {
             throw  $e;
         }
@@ -36,7 +36,7 @@ class Products extends Command
     public function get($id)
     {
         try {
-            $result = $this->perform([], Client::GET_REQUEST, $this->getUrl() . '/' . $id);
+            $result = $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl() . '/' . $id);
 
             $product = new ProductProperties();
             return $product->fromStdClass($result->data);
