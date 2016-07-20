@@ -17,7 +17,7 @@
      */
     class ServerCommand extends Command
     {
-        public function __construct(Client $client = null)
+        public function __construct(\MsiClient\Client $client = null)
         {
             $this->setClient($client);
         }
@@ -26,9 +26,9 @@
         {
             $serverProperty = $this->createPropertieType(ServerProperties::class, $server);
 
-            $type = is_null($serverProperty->id) ? Client::POST_REQUEST : Client::PUT_REQUEST;
+            $type = is_null($serverProperty->id) ? \MsiClient\Client::POST_REQUEST : \MsiClient\Client::PUT_REQUEST;
 
-            return $this->storeRequest($this->getUrl() . '/server', Client::POST_REQUEST, $serverProperty);
+            return $this->storeRequest($this->getUrl() . '/server', \MsiClient\Client::POST_REQUEST, $serverProperty);
         }
 
         public function listAll()
@@ -43,6 +43,6 @@
 
         public function destroy($id)
         {
-            return $this->perform([], Client::DELETE_REQUEST, $this->getUrl() . '/server/' . $id);
+            return $this->perform([], \MsiClient\Client::DELETE_REQUEST, $this->getUrl() . '/server/' . $id);
         }
     }
