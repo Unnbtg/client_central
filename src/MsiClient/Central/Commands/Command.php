@@ -65,7 +65,7 @@
 
                 return $this->client->makeRequest($url, $typeRequest, $params);
             } catch (Server $e) {
-                var_dump($e);
+                echo ($e->getMessage());
                 exit;
                 $response = $e->parsedResponse;
                 echo $e->parsedResponse;
