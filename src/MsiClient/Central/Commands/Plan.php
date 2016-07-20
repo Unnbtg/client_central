@@ -19,7 +19,7 @@ class Plan extends Command
     public function getPlans($page = null)
     {
         try {
-            return $this->perform(['page' => $page], Client::GET_REQUEST, $this->getUrl());
+            return $this->perform(['page' => $page], \MsiClient\Client::GET_REQUEST, $this->getUrl());
         } catch (\Exception $e) {
             throw  $e;
         }
@@ -29,7 +29,7 @@ class Plan extends Command
     {
         try {
 
-            $retorno = $this->perform([], Client::GET_REQUEST, $this->getUrl() . '/' . $id);
+            $retorno = $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl() . '/' . $id);
 
             $plan = new PlanProperties();
             return $plan->fromStdClass($retorno);

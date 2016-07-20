@@ -20,7 +20,7 @@ class Branch extends Command
     public function save(BranchProperties $branch)
     {
         try {
-            $formatter = Formatter::create(Client::Formart_Request);
+            $formatter = Formatter::create(\MsiClient\Client::Formart_Request);
 
             $retorno = $this->perform(
                 ['data' => $formatter->encode(['branch' => $branch->toArray()])],
@@ -37,7 +37,7 @@ class Branch extends Command
     public function getByClientId($id)
     {
         try {
-            $retorno = $this->perform([], Client::GET_REQUEST, $this->getUrl() . '/by-client/' . $id);
+            $retorno = $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl() . '/by-client/' . $id);
             return $retorno->branch;
         } catch (\Exception $e) {
             throw  $e;
@@ -47,7 +47,7 @@ class Branch extends Command
     public function find($id)
     {
         try {
-            $retorno = $this->perform([], Client::GET_REQUEST, $this->getUrl() . '/' . $id);
+            $retorno = $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl() . '/' . $id);
             $branch = new BranchProperties();
             return $branch->fromStdClass($retorno->branch);
 
@@ -59,7 +59,7 @@ class Branch extends Command
     public function delete($id)
     {
         try {
-            return $this->perform([], Client::DELETE_REQUEST, $this->getUrl() . '/' . $id);
+            return $this->perform([], \MsiClient\Client::DELETE_REQUEST, $this->getUrl() . '/' . $id);
         } catch (\Exception $e) {
             throw  $e;
         }

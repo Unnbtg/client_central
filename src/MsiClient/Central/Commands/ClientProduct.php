@@ -21,7 +21,7 @@ class ClientProduct extends Command
     public function show($id)
     {
         try {
-            $result = $this->perform([], Client::GET_REQUEST, $this->getUrl() . '/' . $id)->data;
+            $result = $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl() . '/' . $id)->data;
             $clientProduct = new ClientProductProperties();
             return $clientProduct->fromStdClass($result);
         } catch (\Exception $e) {
@@ -33,17 +33,17 @@ class ClientProduct extends Command
     {
 
         try {
-            $formatter = Formatter::create(Client::Formart_Request);
+            $formatter = Formatter::create(\MsiClient\Client::Formart_Request);
 
             if (!is_null($properties->id)) {
                 $result = $this->perform(
                     ['data' => $formatter->encode(['client_product' => $properties->toArray()])],
-                    Client::PUT_REQUEST, $this->getUrl() . '/' . $properties->id);
+                    \MsiClient\Client::PUT_REQUEST, $this->getUrl() . '/' . $properties->id);
             } else {
 
                 $result = $this->perform(
                     ['data' => $formatter->encode(['client_product' => $properties->toArray()])],
-                    Client::POST_REQUEST);
+                    \MsiClient\Client::POST_REQUEST);
             }
 
             $clientProduct = new ClientProductProperties();

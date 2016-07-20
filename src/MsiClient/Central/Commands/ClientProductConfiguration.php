@@ -26,7 +26,7 @@ class ClientProductConfiguration extends Command
 
             return $this->perform(
                 ['data' => $formatter->encode(['client_product_config' => $config->toArray()])],
-                Client::PUT_REQUEST, $this->getUrl() . '/' . $config->client_product_id . '-' . $config->product_configuration_id);
+                \MsiClient\Client::PUT_REQUEST, $this->getUrl() . '/' . $config->client_product_id . '-' . $config->product_configuration_id);
 
         } catch (\Exception $e) {
             throw  $e;
@@ -44,7 +44,7 @@ class ClientProductConfiguration extends Command
             $formatter = Formatter::create(\MsiClient\Client::Formart_Request);
             return $this->perform(
                 ['data' => $formatter->encode(['client_product_config' => $config])],
-                Client::PUT_REQUEST, $this->getUrl() . '/update-many');
+                \MsiClient\Client::PUT_REQUEST, $this->getUrl() . '/update-many');
 
         } catch (\Exception $e) {
             throw  $e;
