@@ -25,6 +25,7 @@ class Company extends Command
 
     public function store($data)
     {
+        $id = !empty($data['mysuite_id']) ? $data['mysuite_id'] : $data['id'];
         $params = array(
             'fc_nomeempresa'    => $data['name'],
             'fc_cnpj'           => $data['cpf_cnpj'],
@@ -35,15 +36,15 @@ class Company extends Command
             'fc_ct_estado'      => $data['uf'],
             'fc_ct_cep'         => $data['cep'],
             'fc_contato'        => '',
-            'fc_obs'            => $data['code'],
+            'fc_obs'            => $data['code'] .  PHP_EOL . $data['obs'],
             'fc_razaosocial'    => $data['company_name'],
             'fc_inscest'        => '',
             'fc_fone1'          => $data['phone1'],
             'fc_fone2'          => $data['phone2'],
             'fc_statuscli'      => $data['status'],
             'fc_vendedor_geral' => '',
-            'codigooriginal'    => $data['id'],
-            'servicekey'        => md5($this->sigla . $data['id'] . $this->pass)
+            'codigooriginal'    => $id,
+            'servicekey'        => md5($this->sigla . $id . $this->pass)
         );
 
         $params = array_map('utf8_decode', $params);
