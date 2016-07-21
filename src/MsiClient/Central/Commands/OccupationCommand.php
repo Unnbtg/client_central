@@ -14,7 +14,7 @@
     class OccupationCommand extends Command
     {
 
-        protected $url = 'occupation';
+        protected $url = '/occupation';
 
         public function __construct(\MsiClient\Client $client = null)
         {
