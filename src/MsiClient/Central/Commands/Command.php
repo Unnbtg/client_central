@@ -53,32 +53,16 @@
          */
         protected function perform($params, $typeRequest, $url = null)
         {
-            try {
-                if (is_null($url)) {
-                    $url = $this->getUrl();
-                }
 
-                if (empty($this->client)) {
-                    throw new General('You must provide a MSiClient\Central\Client in order to perform any requisition to the server.');
-                }
-
-                return $this->client->makeRequest($url, $typeRequest, $params);
-            } catch (Server $e) {
-                echo($e->getMessage());
-                exit;
-                $response = $e->parsedResponse;
-                echo $e->parsedResponse;
-                exit;
-                if ( ! is_null($response) && $response->error == true) {
-                    throw new CentralException($e->getMessage(), $e->getCode(), $response->details, $e);
-                }
-
-                throw $e;
-            } catch (\Exception $e) {
-                var_dump($e);
-                exit;
-                throw  $e;
+            if (is_null($url)) {
+                $url = $this->getUrl();
             }
+
+            if (empty($this->client)) {
+                throw new General('You must provide a MSiClient\Central\Client in order to perform any requisition to the server.');
+            }
+
+            return $this->client->makeRequest($url, $typeRequest, $params);
         }
 
         /**
@@ -151,6 +135,6 @@
 
         protected function destroyRequest($url)
         {
-            
+
         }
     }
