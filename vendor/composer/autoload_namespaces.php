@@ -7,4 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'MsiClient' => array($baseDir . '/src'),
+    'Bugsnag_' => array($vendorDir . '/bugsnag/bugsnag/src'),
 );

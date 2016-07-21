@@ -190,7 +190,6 @@ class Mysql extends Command
             'cpanel_jsonapi_apiversion' => 2
         ], \MsiClient\Client::POST_REQUEST, $this->getUrl('cpanel'))->cpanelresult;
 
-        var_dump($retorno);
         if ($retorno->event->result != '1') {
             throw  new InvalidRequest("Ocorreu um erro na requisição." . $retorno->error);
         }

@@ -13,6 +13,8 @@
     use GuzzleHttp\Exception\ClientException;
     use GuzzleHttp\Exception\ServerException;
     use MsiClient\Central\Factory\Formatter;
+    use MsiClient\Error\ErrorClientFactory;
+    use MsiClient\Error\ErrorClientInterface;
     use Psr\Http\Message\ResponseInterface;
 
     /***
@@ -23,6 +25,8 @@
      */
     class Server
     {
+
+        protected $errorclient;
 
         /***
          *
@@ -48,6 +52,26 @@
         public function getHost()
         {
             return $this->host;
+        }
+
+        public function createErrorclient($errorClient = 'bugsnag', $apiKey = null)
+        {
+            $this->setErrorClient(ErrorClientFactory::create($errorClient, $apiKey));
+        }
+
+        public function setErrorClient(ErrorClientInterface $errorClient)
+        {
+            $this->errorclient = $errorClient;
+        }
+
+        public function getErrorclient()
+        {
+
+            if (is_null($this->errorclient)) {
+                $this->createErrorclient();
+            }
+
+            return $this->errorclient;
         }
 
         /**
@@ -79,15 +103,18 @@
                 return $this->_parse($response);
 
             } catch (ClientException $e) {
-                throw new \MsiClient\Central\Exception\Server($e->getResponse()->getBody(), $e->getCode(),
-                    $this->_parse($e->getResponse()), $e->getResponse(), $e->getRequest(), $e);
+                throw new \MsiClient\Exception\ServerException("Não foi possível completar a requisição para url: $url",
+                    $e->getMessage(), 400, $params, [], $this->getErrorclient(), $e);
             } catch (\ErrorException $e) {
-                throw new \MsiClient\Central\Exception\Server($e->getMessage(), $e->getCode(), null, null, null, $e);
+                throw new \MsiClient\Exception\ServerException("Não foi possível realiazar a requisição a url: $url",
+                    $e->getMessage(), 100, $params, [], $this->getErrorclient(), $e);
             } catch (ServerException $e) {
-                throw new \MsiClient\Central\Exception\Server($e->getResponse()->getBody(), $e->getCode(),
-                    $this->_parse($e->getResponse()), $e->getResponse(), $e->getRequest(), $e);
+                throw new \MsiClient\Exception\ServerException("A resposta da url não estava compreensível url: $url",
+                    $e->getMessage(), 500, $params, $e->getResponse()->getBody()->getContents(),
+                    $this->getErrorclient(), $e);
             } catch (\Exception $e) {
-                throw new \MsiClient\Central\Exception\Server($e->getMessage(), $e->getCode(), null, null, null, $e);
+                throw new \MsiClient\Exception\ServerException("Erro genérico não parseado", $e->getMessage(), 500,
+                    $params, [], $this->getErrorclient(), $e);
             }
         }
 
