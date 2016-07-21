@@ -147,4 +147,10 @@
 
             return $propertiesAbstract->fromStdClass($response);
         }
+
+
+        protected function destroyRequest($url)
+        {
+            
+        }
     }
