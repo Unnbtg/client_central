@@ -135,6 +135,7 @@
 
         protected function destroyRequest($url)
         {
+            $this->perform([], \MsiClient\Client::DELETE_REQUEST, $url);
 
         }
     }

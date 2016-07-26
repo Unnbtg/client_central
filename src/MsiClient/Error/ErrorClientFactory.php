@@ -17,8 +17,8 @@
         public static function create($errorclientType, $apiKey = null)
         {
 
-            if (is_null($apiKey)) {
-                $apiKey = '388d99c40269d49570227bdfb5e515eb';
+            if (is_null($apiKey) && function_exists('env')) {
+                $apiKey = env('BUGSNAG_KEY');
             }
 
             switch ($errorclientType) {

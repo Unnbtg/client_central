@@ -33,4 +33,8 @@ class ClientUser extends Command
         $user = new ClientUserProperties();
         return $user->fromStdClass($retorno->data);
     }
+    public function destroy($id)
+    {
+        return $this->destroyRequest($this->getUrl().'/'.$id);
+    }
 }
