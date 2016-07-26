@@ -78,4 +78,13 @@
                 throw  $e;
             }
         }
+
+        public function getLastCode()
+        {
+            try {
+                return $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl() . '/last-code/');
+            } catch (\Exception $e) {
+                throw  $e;
+            }
+        }
     }
