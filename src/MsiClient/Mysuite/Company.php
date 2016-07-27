@@ -23,6 +23,19 @@ class Company extends Command
         return $this->makeRequest($url, 'POST', $params);
     }
 
+    public function showByOriginalCode($code)
+    {
+        $url = $this->getUrl('ws_getclientes.php');
+
+        $params = [
+            'codigooriginal' => $code,
+            'sigla' => $this->sigla,
+            'servicekey' => md5($this->sigla . $this->pass),
+        ];
+
+        return $this->makeRequest($url, 'POST', $params);
+    }
+
     public function store($data)
     {
         $id = !empty($data['mysuite_id']) ? $data['mysuite_id'] : $data['id'];
