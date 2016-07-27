@@ -60,9 +60,10 @@
             }
 
             $type = empty($userProperties->id) ? \MsiClient\Client::POST_REQUEST : \MsiClient\Client::PUT_REQUEST;
+            $url = empty($userProperties->id) ? $this->getUrl() : $this->getUrl() . '/' . $userProperties->id;
 
-            return $this->storeRequest($this->getUrl() . '/' . $userProperties->id, $type, $userProperties);
 
+            return $this->storeRequest($url, $type, $userProperties);
         }
 
         public function dataTable($data)
