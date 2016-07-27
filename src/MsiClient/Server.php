@@ -98,6 +98,10 @@
                     unset($params['form_params']);
                 }
 
+                if ($type == \MsiClient\Client::POST_REQUEST && isset($params['query'])) {
+                    unset($params['query']);
+                }
+
                 $response = $client->request($type, $url, $params);
 
                 return $this->_parse($response);
