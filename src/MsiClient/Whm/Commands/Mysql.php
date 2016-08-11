@@ -41,7 +41,7 @@ class Mysql extends Command
             'cpanel_jsonapi_module' => 'MysqlFE',
             'cpanel_jsonapi_func' => 'createdb',
             'cpanel_jsonapi_apiversion' => 2
-        ], \MsiClient\Client::POST_REQUEST, $this->getUrl('cpanel'))->cpanelresult;
+        ], \MsiClient\Client::GET_REQUEST, $this->getUrl('cpanel'))->cpanelresult;
 
         if (empty($retorno->data)) {
             throw  new InvalidRequest("Ocorreu um erro na requisição." . $retorno->error);
@@ -57,7 +57,7 @@ class Mysql extends Command
             'cpanel_jsonapi_module' => 'MysqlFE',
             'cpanel_jsonapi_func' => 'deletedb',
             'cpanel_jsonapi_apiversion' => 2
-        ], \MsiClient\Client::POST_REQUEST, $this->getUrl('cpanel'))->cpanelresult;
+        ], \MsiClient\Client::GET_REQUEST, $this->getUrl('cpanel'))->cpanelresult;
 
         if (empty($retorno->data)) {
             throw  new InvalidRequest("Ocorreu um erro na requisição." . $retorno->error);
@@ -74,8 +74,7 @@ class Mysql extends Command
             'cpanel_jsonapi_module' => 'MysqlFE',
             'cpanel_jsonapi_func' => 'createdbuser',
             'cpanel_jsonapi_apiversion' => 2
-        ], \MsiClient\Client::POST_REQUEST, $this->getUrl('cpanel'))->cpanelresult;
-
+        ], \MsiClient\Client::GET_REQUEST, $this->getUrl('cpanel'))->cpanelresult;
         if (empty($retorno->data)) {
             throw  new InvalidRequest("Ocorreu um erro na requisição." . $retorno->error);
         }
@@ -90,7 +89,7 @@ class Mysql extends Command
             'cpanel_jsonapi_module' => 'MysqlFE',
             'cpanel_jsonapi_func' => 'deletedbuser',
             'cpanel_jsonapi_apiversion' => 2
-        ], \MsiClient\Client::POST_REQUEST, $this->getUrl('cpanel'))->cpanelresult;
+        ], \MsiClient\Client::GET_REQUEST, $this->getUrl('cpanel'))->cpanelresult;
 
         if (empty($retorno->data)) {
             throw  new InvalidRequest("Ocorreu um erro na requisição." . $retorno->error);
@@ -116,7 +115,7 @@ class Mysql extends Command
             'cpanel_jsonapi_module' => 'MysqlFE',
             'cpanel_jsonapi_func' => 'setdbuserprivileges',
             'cpanel_jsonapi_apiversion' => 2
-        ], \MsiClient\Client::POST_REQUEST, $this->getUrl('cpanel'))->cpanelresult;
+        ], \MsiClient\Client::GET_REQUEST, $this->getUrl('cpanel'))->cpanelresult;
 
         if ($retorno->event->result != '1') {
             throw  new InvalidRequest("Ocorreu um erro na requisição." . $retorno->error);
@@ -134,7 +133,7 @@ class Mysql extends Command
             'cpanel_jsonapi_module' => 'MysqlFE',
             'cpanel_jsonapi_func' => 'revokedbuserprivileges',
             'cpanel_jsonapi_apiversion' => 2
-        ], \MsiClient\Client::POST_REQUEST, $this->getUrl('cpanel'))->cpanelresult;
+        ], \MsiClient\Client::GET_REQUEST, $this->getUrl('cpanel'))->cpanelresult;
 
 
         if ($retorno->event->result != '1') {
@@ -150,7 +149,7 @@ class Mysql extends Command
             'cpanel_jsonapi_module' => 'MysqlFE',
             'cpanel_jsonapi_func' => 'listdbs',
             'cpanel_jsonapi_apiversion' => 2
-        ], \MsiClient\Client::POST_REQUEST, $this->getUrl('cpanel'))->cpanelresult;
+        ], \MsiClient\Client::GET_REQUEST, $this->getUrl('cpanel'))->cpanelresult;
 
         if (!$retorno->event->result) {
             throw  new InvalidRequest("Ocorreu um erro na requisição." . $retorno->error);
@@ -172,7 +171,7 @@ class Mysql extends Command
             'cpanel_jsonapi_module' => 'MysqlFE',
             'cpanel_jsonapi_func' => 'dbuserexists',
             'cpanel_jsonapi_apiversion' => 2
-        ], \MsiClient\Client::POST_REQUEST, $this->getUrl('cpanel'))->cpanelresult;
+        ], \MsiClient\Client::GET_REQUEST, $this->getUrl('cpanel'))->cpanelresult;
 
         if ($retorno->event->result != '1') {
             throw  new InvalidRequest("Ocorreu um erro na requisição." . $retorno->error);
@@ -188,7 +187,7 @@ class Mysql extends Command
             'cpanel_jsonapi_module' => 'MysqlFE',
             'cpanel_jsonapi_func' => 'authorizehost',
             'cpanel_jsonapi_apiversion' => 2
-        ], \MsiClient\Client::POST_REQUEST, $this->getUrl('cpanel'))->cpanelresult;
+        ], \MsiClient\Client::GET_REQUEST, $this->getUrl('cpanel'))->cpanelresult;
 
         if ($retorno->event->result != '1') {
             throw  new InvalidRequest("Ocorreu um erro na requisição." . $retorno->error);

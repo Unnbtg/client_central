@@ -12,6 +12,7 @@
     use GuzzleHttp\Client;
     use GuzzleHttp\Exception\ClientException;
     use GuzzleHttp\Exception\ServerException;
+    use MsiClient\Authorization\Authorizable;
     use MsiClient\Central\Factory\Formatter;
     use MsiClient\Error\ErrorClientFactory;
     use MsiClient\Error\ErrorClientInterface;
@@ -25,6 +26,12 @@
      */
     class Server
     {
+
+
+        /**
+         * @var Authorizable[]
+         */
+        protected $autorizables;
 
         protected $errorclient;
 
@@ -52,6 +59,12 @@
         public function getHost()
         {
             return $this->host;
+        }
+
+
+        public function addAuthorizable($auth)
+        {
+            $this->autorizables[] = $auth;
         }
 
         public function createErrorclient($errorClient = 'bugsnag', $apiKey = null)
@@ -94,29 +107,40 @@
 
             try {
 
+                $params = $this->applyAuth($params);
+
                 if ($type == \MsiClient\Client::GET_REQUEST && isset($params['form_params'])) {
                     unset($params['form_params']);
                 }
 
-                if ($type == \MsiClient\Client::POST_REQUEST && isset($params['query'])) {
+                if (in_array($type, [\MsiClient\Client::POST_REQUEST,\MsiClient\Client::PUT_REQUEST]) && isset($params['query'])) {
                     unset($params['query']);
                 }
+
 
                 $response = $client->request($type, $url, $params);
 
                 return $this->_parse($response);
 
             } catch (ClientException $e) {
+
+                echo $e->getResponse()->getBody()->getContents();exit;
                 throw new \MsiClient\Exception\ServerException("Não foi possível completar a requisição para url: $url",
                     $e->getMessage(), 400, $params, [], $this->getErrorclient(), $e);
             } catch (\ErrorException $e) {
+                echo $e->getMessage();exit;
+                var_dump($type, $url, $params, $e->getFile(), $e->getLine());
                 throw new \MsiClient\Exception\ServerException("Não foi possível realiazar a requisição a url: $url",
                     $e->getMessage(), 100, $params, [], $this->getErrorclient(), $e);
             } catch (ServerException $e) {
+                echo $e->getResponse()->getBody()->getContents();exit;
+                var_dump($type, $url, $params, $e->getFile(), $e->getLine());
                 throw new \MsiClient\Exception\ServerException("A resposta da url não estava compreensível url: $url",
                     $e->getMessage(), 500, $params, $e->getResponse()->getBody()->getContents(),
                     $this->getErrorclient(), $e);
             } catch (\Exception $e) {
+                echo $e->getMessage();exit;
+                var_dump($type, $url, $params);
                 throw new \MsiClient\Exception\ServerException("Erro genérico não parseado", $e->getMessage(), 500,
                     $params, [], $this->getErrorclient(), $e);
             }
@@ -143,5 +167,20 @@
             }
 
             return $formatter->decode($response->getBody());
+        }
+
+
+        public function applyAuth($params)
+        {
+
+            if (empty($this->autorizables)) {
+                return $params;
+            }
+
+            foreach ($this->autorizables as $auth) {
+                $params = $auth->apply($params);
+            }
+
+            return $params;
         }
     }

@@ -39,7 +39,7 @@ class ClientProductProperties extends PropertiesAbstract
         $retorno = [];
 
         foreach ($this->product->configurations as $config) {
-            $retorno[] = $config->name;
+            $retorno[$config->id] = $config->name;
         }
 
         return $retorno;

@@ -33,11 +33,10 @@ class Account extends Command
             $array = [
                 'search' => $name,
                 'searchmethod' => 'exact',
-                'searchtype'   => 'user'
+                'searchtype'   => 'user',
             ];
         }
-
-        $retorno = $this->perform($array, \MsiClient\Client::POST_REQUEST, $this->getUrl("/listaccts"));
+        $retorno = $this->perform($array, \MsiClient\Client::GET_REQUEST, $this->getUrl("/listaccts"));
 
         if (isset($retorno->metadata->reason) && $retorno->metadata->reason == "No accounts found.") {
             return false;
@@ -60,7 +59,7 @@ class Account extends Command
 
     public function create(AccountProperties $account)
     {
-        $retorno = $this->perform($account->toArray(), \MsiClient\Client::POST_REQUEST, $this->getUrl('/createacct'));
+        $retorno = $this->perform($account->toArray(), \MsiClient\Client::GET_REQUEST, $this->getUrl('/createacct'));
 
         if (!$retorno->metadata->result) {
             throw new InvalidRequest('Ocorreu um erro na requisição.' . $retorno->metadata->reason);
