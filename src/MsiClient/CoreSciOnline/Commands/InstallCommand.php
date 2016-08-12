@@ -22,7 +22,8 @@ class InstallCommand extends CommandAbstract
     }
 
 
-    public function install($params) {
+    public function install($params)
+    {
         return $this->perform($params, Client::POST_REQUEST);
     }
 
