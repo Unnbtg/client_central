@@ -22,6 +22,7 @@ class Jwt implements Authorizable
     public function apply($request)
     {
         $request['headers']['Authorization'] = 'Bearer ' . $this->token;
+        $request['headers']['X-Authorization'] = 'Bearer ' . $this->token;
 
         return $request;
     }

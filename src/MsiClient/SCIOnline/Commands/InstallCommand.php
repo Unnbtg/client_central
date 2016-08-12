@@ -36,7 +36,7 @@ class InstallCommand extends Command
 
     public function release($code, $masterKey)
     {
-        return $this->perform(['rootkey' => $masterKey], Client::POST_REQUEST, $this->getUrl().'/release', ['Sci-Instance' => $code, "X-Root-Key" => $masterKey]);
+        return $this->perform(['rootkey' => $masterKey], Client::POST_REQUEST, $this->getUrl().'/release', ['X-Sci-Instance' => $code, "X-Root-Key" => $masterKey]);
     }
 
     public function notifyEnd()
