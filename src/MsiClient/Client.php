@@ -10,6 +10,7 @@ namespace MsiClient;
 
 use MsiClient\Central\Exception\General;
 use MsiClient\Central\Formatter\IFormatter;
+use MsiClient\Exception\ServerException;
 
 /***
  * Basic class to communicate with the api server.
@@ -144,7 +145,7 @@ class Client
 
             return true;
 
-        } catch (MsiClient\Central\Exception\Server $e) {
+        } catch (ServerException $e) {
             throw $e;
         } catch (\Exception $e) {
             throw new General($e->getMessage(), $e->getCode(), $e);

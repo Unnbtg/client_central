@@ -31,7 +31,7 @@ class Account extends Command
 
         if (!is_null($name)) {
             $array = [
-                'search' => $name,
+                'search'       => $name,
                 'searchmethod' => 'exact',
                 'searchtype'   => 'user',
             ];

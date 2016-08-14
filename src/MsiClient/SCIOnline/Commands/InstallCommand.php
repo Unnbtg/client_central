@@ -30,13 +30,13 @@ class InstallCommand extends Command
             'rootkey'  => $masterKey,
         ];
 
-        var_dump($this->perform($config, \MsiClient\Client::POST_REQUEST, $this->getUrl().'/life', ["X-Root-Key" => $masterKey] ));
+        return $this->perform($config, \MsiClient\Client::POST_REQUEST, $this->getUrl() . '/life', ["X-Root-Key" => $masterKey]);
     }
 
 
     public function release($code, $masterKey)
     {
-        return $this->perform(['rootkey' => $masterKey], Client::POST_REQUEST, $this->getUrl().'/release', ['X-Sci-Instance' => $code, "X-Root-Key" => $masterKey]);
+        return $this->perform(['rootkey' => $masterKey], Client::POST_REQUEST, $this->getUrl() . '/release', ['X-Sci-Instance' => $code, "X-Root-Key" => $masterKey]);
     }
 
     public function notifyEnd()
