@@ -36,6 +36,7 @@ abstract class CommandAbstract
             throw new General('You must provide a MSiClient\Central\Client in order to perform any requisition to the server.');
         }
         $toSend['json'] = $params;
+
         return $this->client->makeRequest($url, $typeRequest, $toSend, false);
     }
 
