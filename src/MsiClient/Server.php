@@ -113,10 +113,11 @@ class Server
                 unset($params['form_params']);
             }
 
-            if (in_array($type, [\MsiClient\Client::POST_REQUEST, \MsiClient\Client::PUT_REQUEST]) && isset($params['query'])) {
+            if (in_array($type,
+                    [\MsiClient\Client::POST_REQUEST, \MsiClient\Client::PUT_REQUEST]) && isset($params['query'])
+            ) {
                 unset($params['query']);
             }
-
             $response = $client->request($type, $url, $params);
 
             return $this->_parse($response);
