@@ -22,12 +22,13 @@ class InstallCommand extends Command
     }
 
 
-    public function install($code, $conn, $masterKey)
+    public function install($code, $conn, $masterKey, $overrides)
     {
         $config = [
             'code'     => $code,
             "database" => $conn,
             'rootkey'  => $masterKey,
+            'overrides' => $overrides
         ];
 
         return $this->perform($config, \MsiClient\Client::POST_REQUEST, $this->getUrl() . '/life', ["X-Root-Key" => $masterKey]);
