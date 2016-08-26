@@ -21,9 +21,9 @@ class ClientCommand extends CommandAbstract
     }
 
 
-    public function store($code, $key)
+    public function store($code, $instance,  $key)
     {
-        return $this->perform(['code' => $code], Client::POST_REQUEST, $this->getUrl(),
+        return $this->perform(['code' => $code, 'instance'=> $instance], Client::POST_REQUEST, $this->getUrl(),
             ['Authorization' => "Bearer " . $key]);
     }
 }
