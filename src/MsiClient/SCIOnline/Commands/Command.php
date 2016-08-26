@@ -22,12 +22,17 @@ class Command
 
     protected $url;
 
+    protected $files;
 
     public function getUrl()
     {
         return $this->client->getHost() . $this->url;
     }
 
+    public function addFile($name, $filePath)
+    {
+        $this->files["file"] = [ 'name' => 'file', "filename" => $name, 'contents' => fopen($filePath, 'r')];
+    }
 
     /**
      * @param Client $client
@@ -62,12 +67,18 @@ class Command
         $toSend ['headers'] = $headers;
 
         $verb = 'form_params';
+
         if ($typeRequest == \MsiClient\Client::GET_REQUEST) {
             $verb = 'query';
         }
 
-        $toSend [$verb] = $params;
+        if (!empty($this->files)) {
+            $params = array_merge($params, $this->files);
+            $verb = 'multipart';
+        }
 
+        $toSend [$verb] = $params;
+        var_dump($toSend);
         return $this->client->makeRequest($url, $typeRequest, $toSend, false);
     }
 }
