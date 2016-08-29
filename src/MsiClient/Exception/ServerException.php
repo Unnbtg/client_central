@@ -72,4 +72,9 @@
             }
         }
 
+        public function getParsedResult()
+        {
+            return $this->parsedResult;
+        }
+
     }

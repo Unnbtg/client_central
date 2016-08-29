@@ -10,6 +10,7 @@
 
     use MsiClient\Central\Commands\Properties\ClientProperties;
     use MsiClient\Central\Factory\Formatter;
+    use MsiClient\Exception\ServerException;
 
     class Client extends Command
     {
@@ -18,18 +19,22 @@
 
         public function save(ClientProperties $client)
         {
+
             try {
                 $formatter = Formatter::create(\MsiClient\Client::Formart_Request);
 
+
                 if ( ! is_null($client->id)) {
+
                     return $this->perform(['data' => $formatter->encode(['client' => $client->toArray()])],
                         \MsiClient\Client::PUT_REQUEST, $this->getUrl() . '/' . $client->id);
                 } else {
+
                     return $this->perform(['data' => $formatter->encode(['client' => $client->toArray()])],
                         \MsiClient\Client::POST_REQUEST);
                 }
 
-            } catch (\Exception $e) {
+            } catch (ServerException $e) {
                 throw  $e;
             }
         }
