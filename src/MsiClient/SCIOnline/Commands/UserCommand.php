@@ -27,4 +27,22 @@ class UserCommand extends Command
         return $this->perform($client, Client::POST_REQUEST);
     }
 
+
+
+    public function recovery($email, $sciInstance)
+    {
+        $toSend = [
+            "email" => $email,
+        ];
+
+        $token = $this->perform($toSend, Client::POST_REQUEST, $this->getUrl().'/reset-password ', [
+            "X-Sci-Instance" => $sciInstance
+        ]);
+
+        if (!is_object($token)){
+            return false;
+        }
+
+        return true;
+    }
 }

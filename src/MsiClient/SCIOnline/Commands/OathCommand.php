@@ -43,4 +43,5 @@ class OathCommand extends Command
         return $token->data->access_token;
     }
 
+
 }
