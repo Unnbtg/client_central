@@ -78,7 +78,7 @@ class Command
         }
 
         $toSend [$verb] = $params;
-        var_dump($toSend);
+
         return $this->client->makeRequest($url, $typeRequest, $toSend, false);
     }
 }
