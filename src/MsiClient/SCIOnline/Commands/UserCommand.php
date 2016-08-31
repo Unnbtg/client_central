@@ -35,7 +35,7 @@ class UserCommand extends Command
             "email" => $email,
         ];
 
-        $token = $this->perform($toSend, Client::POST_REQUEST, $this->getUrl().'/reset-password ', [
+        $token = $this->perform($toSend, Client::POST_REQUEST, $this->getUrl().'/reset-password', [
             "X-Sci-Instance" => $sciInstance
         ]);
 
