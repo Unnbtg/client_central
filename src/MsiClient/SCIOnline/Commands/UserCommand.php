@@ -29,10 +29,11 @@ class UserCommand extends Command
 
 
 
-    public function recovery($email, $sciInstance)
+    public function recovery($email, $redirect, $sciInstance)
     {
         $toSend = [
             "email" => $email,
+            'redirect_to' => $redirect
         ];
 
         $token = $this->perform($toSend, Client::POST_REQUEST, $this->getUrl().'/reset-password', [
