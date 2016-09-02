@@ -9,7 +9,7 @@
 namespace MsiClient;
 
 
-use GuzzleHttp\Client;
+use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ServerException;
 use MsiClient\Authorization\Authorizable;
@@ -103,7 +103,7 @@ class Server
 
     public function callApi($type, $url, $params)
     {
-        $client = new Client();
+        $client = new GuzzleClient();
 
         try {
 
@@ -138,6 +138,7 @@ class Server
                 $e->getMessage(), 500, $params, $this->_parse($e->getResponse()),
                 $this->getErrorclient(), $e);
         } catch (\Exception $e) {
+
             $std = new \stdClass();
             $std->data = "Ocorreu um erro ao realizar a requisição, tente novamente.";
 
