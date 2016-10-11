@@ -2,16 +2,16 @@
 /**
  * Created by PhpStorm.
  * User: unm
- * Date: 25/08/16
- * Time: 11:42
+ * Date: 9/29/16
+ * Time: 3:10 PM
  */
 
-namespace MsiClient\Login\Commands;
+namespace MsiClient\Dolmens\Commands;
 
 
 use MsiClient\Client;
 
-class CommandAbstract
+class Command
 {
     /***
      * @var Client $client
@@ -55,7 +55,6 @@ class CommandAbstract
         if (empty($this->client)) {
             throw new General('You must provide a MSiClient\Central\Client in order to perform any requisition to the server.');
         }
-
         $toSend = [];
         $headers["Accept"] = 'application/json';
         $toSend ['headers'] = $headers;
@@ -66,6 +65,8 @@ class CommandAbstract
         }
 
         $toSend [$verb] = $params;
+
         return $this->client->makeRequest($url, $typeRequest, $toSend, false);
     }
+
 }

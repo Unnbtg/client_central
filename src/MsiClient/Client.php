@@ -181,4 +181,8 @@ class Client
         $this->headers['headers'][$header] = $value;
     }
 
+    public function getServer()
+    {
+        return $this->server;
+    }
 }

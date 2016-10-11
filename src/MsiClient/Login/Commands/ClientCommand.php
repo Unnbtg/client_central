@@ -26,4 +26,6 @@ class ClientCommand extends CommandAbstract
         return $this->perform(['code' => $code, 'instance'=> $instance], Client::POST_REQUEST, $this->getUrl(),
             ['Authorization' => "Bearer " . $key]);
     }
+
+
 }

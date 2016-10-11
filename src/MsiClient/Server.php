@@ -69,7 +69,7 @@ class Server
 
     public function createErrorclient($errorClient = 'bugsnag', $apiKey = null)
     {
-        $this->setErrorClient(ErrorClientFactory::create($errorClient, $apiKey));
+        //$this->setErrorClient(ErrorClientFactory::create($errorClient, $apiKey));
     }
 
     public function setErrorClient(ErrorClientInterface $errorClient)
@@ -125,7 +125,6 @@ class Server
             return $this->_parse($response);
 
         } catch (ClientException $e) {
-
             throw new \MsiClient\Exception\ServerException("Não foi possível completar a requisição para url: $url",
                 $e->getMessage(), 400, $params, [], $this->getErrorclient(), $e);
         } catch (\ErrorException $e) {

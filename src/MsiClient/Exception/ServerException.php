@@ -44,6 +44,7 @@
 
         public function notifyError($humanReadableError, ErrorClientInterface $erroclient, $additionalInfo)
         {
+
             $error = $this->getErrortype();
 
             switch ($error) {
