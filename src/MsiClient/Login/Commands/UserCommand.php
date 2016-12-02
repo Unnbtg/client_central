@@ -30,6 +30,11 @@ class UserCommand extends CommandAbstract
         return $this->perform($attributes, Client::PUT_REQUEST, $this->getUrl().'/'.$id);
     }
 
+    public function delete($id)
+    {
+        return $this->perform([], Client::DELETE_REQUEST, $this->getUrl().'/'. $id);
+    }
+
     public function store($attributes)
     {
         return $this->perform($attributes, Client::POST_REQUEST, $this->getUrl());
