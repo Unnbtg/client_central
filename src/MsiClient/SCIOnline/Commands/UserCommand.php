@@ -46,4 +46,22 @@ class UserCommand extends Command
 
         return true;
     }
+
+    public function sendActivation($email, $redirect, $sciInstance)
+    {
+        $toSend = [
+            "email" => $email,
+            'redirect_to' => $redirect
+        ];
+
+        $token = $this->perform($toSend, Client::POST_REQUEST, $this->getUrl().'/send-activation', [
+            "X-Sci-Instance" => $sciInstance
+        ]);
+
+        if (!is_object($token)){
+            return false;
+        }
+
+        return true;
+    }
 }
