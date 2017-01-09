@@ -45,5 +45,9 @@ class InstallCommand extends Command
         $this->perform([], Client::POST_REQUEST, $this->getUrl() . '/birth');
     }
 
+    public function getUserToken($code, $masterKey)
+    {
+        return $this->perform([], Client::POST_REQUEST, $this->getUrl().'/users/1/token', ['X-Sci-Instance' => $code, "X-Root-Key" => $masterKey]);
+    }
 
 }
