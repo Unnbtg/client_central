@@ -32,17 +32,19 @@
             $this->parsedResult = $parsedResult;
 
             parent::__construct($programError, $code, $previous);
-
+            $this->response = $response;
             if ( ! is_null($errorClient)) {
 
                 $additionalInfo = [
                     'sent'     => $params,
-                    'response' => $parsedResult,
+                    'response' => $this->getResponseBody()->getContents(),
+                    'response_code' => $this->getResponseCode()
                 ];
+
 
                 $this->notifyError($humanReadableError, $errorClient, $additionalInfo);
             }
-            $this->response = $response;
+
         }
 
         public function notifyError($humanReadableError, ErrorClientInterface $erroclient, $additionalInfo)

@@ -69,7 +69,7 @@ class Server
 
     public function createErrorclient($errorClient = 'bugsnag', $apiKey = null)
     {
-        //$this->setErrorClient(ErrorClientFactory::create($errorClient, $apiKey));
+        $this->setErrorClient(ErrorClientFactory::create($errorClient, $apiKey));
     }
 
     public function setErrorClient(ErrorClientInterface $errorClient)
