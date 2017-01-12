@@ -38,4 +38,13 @@
             }
         }
 
+        public function getAvaliablePlans($client_id)
+        {
+            try {
+                return $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl()."/installable/{$client_id}");
+            } catch (\Exception $e) {
+                throw  $e;
+            }
+        }
+
     }
