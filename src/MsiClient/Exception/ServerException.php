@@ -11,11 +11,12 @@
 
     use Exception;
     use MsiClient\Error\ErrorClientInterface;
+    use Psr\Http\Message\ResponseInterface;
 
     class ServerException extends \Exception
     {
         protected $parsedResult;
-
+        protected $response;
 
         public function __construct(
             $humanReadableError,
@@ -24,7 +25,8 @@
             $params = [],
             $parsedResult = null,
             ErrorClientInterface $errorClient = null,
-            Exception $previous = null
+            Exception $previous = null,
+            ResponseInterface $response = null
         ) {
 
             $this->parsedResult = $parsedResult;
@@ -40,6 +42,7 @@
 
                 $this->notifyError($humanReadableError, $errorClient, $additionalInfo);
             }
+            $this->response = $response;
         }
 
         public function notifyError($humanReadableError, ErrorClientInterface $erroclient, $additionalInfo)
@@ -60,6 +63,23 @@
             }
         }
 
+        public function getResponseCode()
+        {
+            if (is_null($this->response)){
+                return null;
+            }
+
+            return $this->response->getStatusCode();
+        }
+
+        public function getResponseBody()
+        {
+            if (is_null($this->response)) {
+                return null;
+            }
+
+            return $this->response->getBody();
+        }
 
         public function getErrortype()
         {
