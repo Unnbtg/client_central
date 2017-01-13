@@ -24,9 +24,18 @@ class Command
 
     protected $files;
 
+    protected $isJson = false;
+
     public function getUrl()
     {
         return $this->client->getHost() . $this->url;
+    }
+
+
+    public function json()
+    {
+        $this->isJson = true;
+        return $this;
     }
 
     public function addFile($name, $filePath)
@@ -75,6 +84,10 @@ class Command
         if (!empty($this->files)) {
             $params = array_merge($params, $this->files);
             $verb = 'multipart';
+        }
+
+        if ($this->isJson) {
+            $verb = "json";
         }
 
         $toSend [$verb] = $params;

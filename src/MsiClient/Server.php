@@ -125,12 +125,15 @@ class Server
             return $this->_parse($response);
 
         } catch (ClientException $e) {
+
             throw new \MsiClient\Exception\ServerException("Não foi possível completar a requisição para url: $url",
                 $e->getMessage(), 400, $params, [], $this->getErrorclient(), $e, $e->getResponse());
         } catch (\ErrorException $e) {
+
             throw new \MsiClient\Exception\ServerException("Não foi possível realiazar a requisição a url: $url",
                 $e->getMessage(), 100, $params, [], $this->getErrorclient(), $e);
         } catch (ServerException $e) {
+
             throw new \MsiClient\Exception\ServerException("A resposta da url não estava compreensível url: $url",
                 $e->getMessage(), 500, $params, $this->_parse($e->getResponse()),
                 $this->getErrorclient(), $e, $e->getResponse());

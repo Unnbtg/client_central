@@ -97,6 +97,7 @@ class Client
         $params = array_merge($params, $this->headers);
 
         if ($formatter == null) {
+
             return $this->server->callApi($type, $url, $params);
         }
 

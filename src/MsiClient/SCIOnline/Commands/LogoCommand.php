@@ -16,6 +16,7 @@ class LogoCommand extends Command
 
     protected $url = 'system/logo';
 
+
     public function store($filePath, $name = null, $masterKey, $code)
     {
         if (is_null($name)) {
