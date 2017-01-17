@@ -141,7 +141,7 @@ class Server
 
             $std = new \stdClass();
             $std->data = "Ocorreu um erro ao realizar a requisição, tente novamente.";
-
+            var_dump($type, $url, $params);exit;
             throw new \MsiClient\Exception\ServerException("Erro genérico não parseado", $e->getMessage(), 500,
                 $params, $std, $this->getErrorclient(), $e);
         }

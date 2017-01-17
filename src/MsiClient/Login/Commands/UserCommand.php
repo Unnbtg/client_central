@@ -44,4 +44,15 @@ class UserCommand extends CommandAbstract
     {
         return $this->perform($filters, Client::GET_REQUEST, $this->getUrl());
     }
+
+    public function email_exists($email)
+    {
+        try {
+            $this->perform(['email' => $email], Client::GET_REQUEST, $this->getUrl().'exists/');
+            return true;
+        } catch (\Exception $e) {
+            return false;
+        }
+
+    }
 }

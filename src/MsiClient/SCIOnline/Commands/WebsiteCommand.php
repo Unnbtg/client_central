@@ -22,12 +22,13 @@ class WebsiteCommand extends Command
     }
 
 
-    public function store($account, $name, $domain)
+    public function store($account, $name, $domain, $settings)
     {
         return $this->perform([
             'uid' => $account,
             'name' => $name,
-            'domain' => $domain
+            'domain' => $domain,
+            'settings' => $settings
         ], Client::POST_REQUEST);
     }
 

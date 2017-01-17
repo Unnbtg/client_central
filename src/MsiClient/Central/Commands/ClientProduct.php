@@ -21,7 +21,11 @@
         public function show($id)
         {
             try {
-                $result = $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl() . '/' . $id)->data;
+                $result = $this->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl() . '/' . $id);
+                if (!isset($result->data)) {
+                    throw new \Exception($result);
+                }
+                $result = $result->data;
                 $clientProduct = new ClientProductProperties();
 
                 return $clientProduct->fromStdClass($result);

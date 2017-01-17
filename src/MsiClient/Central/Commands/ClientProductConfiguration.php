@@ -44,6 +44,11 @@
             try {
                 $formatter = Formatter::create(\MsiClient\Client::Formart_Request);
 
+                echo $formatter->encode(['client_product_config' => $config]);
+
+                var_dump(['data' => $formatter->encode(['client_product_config' => $config])],
+                    \MsiClient\Client::PUT_REQUEST, $this->getUrl() . '/update-many');exit;
+
                 return $this->perform(['data' => $formatter->encode(['client_product_config' => $config])],
                     \MsiClient\Client::PUT_REQUEST, $this->getUrl() . '/update-many');
 
