@@ -125,9 +125,13 @@ class Server
             return $this->_parse($response);
 
         } catch (ClientException $e) {
+            $client = $this->getErrorclient();
+            if ($e->getResponse()->getStatusCode() == 403) {
+                $client = null;
+            }
 
             throw new \MsiClient\Exception\ServerException("Não foi possível completar a requisição para url: $url",
-                $e->getMessage(), 400, $params, [], $this->getErrorclient(), $e, $e->getResponse());
+                $e->getMessage(), 400, $params, [], $client, $e, $e->getResponse());
         } catch (\ErrorException $e) {
 
             throw new \MsiClient\Exception\ServerException("Não foi possível realiazar a requisição a url: $url",
