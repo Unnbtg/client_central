@@ -22,7 +22,7 @@ class WebsiteCommand extends Command
     }
 
 
-    public function store($account, $name, $domain, $settings)
+    public function store($account, $name, $domain, $settings = [])
     {
         return $this->perform([
             'uid' => $account,
