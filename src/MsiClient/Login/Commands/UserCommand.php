@@ -10,10 +10,11 @@ namespace MsiClient\Login\Commands;
 
 
 use MsiClient\Client;
+use MsiClient\Exception\ServerException;
 
 class UserCommand extends CommandAbstract
 {
-    protected $url = "/users";
+    protected $url = "users";
 
     public function __construct(Client $client)
     {
@@ -48,9 +49,9 @@ class UserCommand extends CommandAbstract
     public function email_exists($email)
     {
         try {
-            $this->perform(['email' => $email], Client::GET_REQUEST, $this->getUrl().'exists/');
+            $this->perform(['email' => $email], Client::GET_REQUEST, $this->getUrl().'/exist');
             return true;
-        } catch (\Exception $e) {
+        } catch (ServerException $e) {
             return false;
         }
 
