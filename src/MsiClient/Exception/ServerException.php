@@ -42,7 +42,7 @@
                 ];
 
 
-                $this->notifyError($humanReadableError, $errorClient, $additionalInfo);
+                //$this->notifyError($humanReadableError, $errorClient, $additionalInfo);
             }
 
         }
