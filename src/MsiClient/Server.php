@@ -109,7 +109,6 @@ class Server
 
             $params = $this->applyAuth($params);
 
-
             if ($type == \MsiClient\Client::GET_REQUEST && isset($params['form_params'])) {
                 unset($params['form_params']);
             }
@@ -121,7 +120,6 @@ class Server
             }
 
             $response = $client->request($type, $url, $params);
-
             return $this->_parse($response);
 
         } catch (ClientException $e) {
@@ -137,7 +135,6 @@ class Server
             throw new \MsiClient\Exception\ServerException("Não foi possível realiazar a requisição a url: $url",
                 $e->getMessage(), 100, $params, [], $this->getErrorclient(), $e);
         } catch (ServerException $e) {
-
             throw new \MsiClient\Exception\ServerException("A resposta da url não estava compreensível url: $url",
                 $e->getMessage(), 500, $params, $this->_parse($e->getResponse()),
                 $this->getErrorclient(), $e, $e->getResponse());
@@ -159,7 +156,6 @@ class Server
 
     private function _parse(ResponseInterface $response)
     {
-
         $contentType = $response->getHeader('Content-Type');
         if (is_null($contentType)) {
             return $response->getBody();

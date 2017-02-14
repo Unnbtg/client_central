@@ -71,13 +71,10 @@ class Client
 
     public function makeRequest($url, $type, $params = null, $parse = true, IFormatter $formatter = null)
     {
-
         if ($parse) {
-
             $query = $this->getQuery($params);
             $params = ['form_params' => $query, 'query' => $query];
         }
-
 
         if ($this->server->isSsl()) {
             $this->headers['verify'] = false;
@@ -93,14 +90,11 @@ class Client
             $this->headers['headers']['Authorization'] = 'Bearer ' . $this->server->getToken()->access_token;
         }
 
-
         $params = array_merge($params, $this->headers);
 
         if ($formatter == null) {
-
             return $this->server->callApi($type, $url, $params);
         }
-
         return $formatter->decode($this->server->callApi($type, $url, $params));
     }
 
