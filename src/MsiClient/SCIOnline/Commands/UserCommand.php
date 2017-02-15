@@ -45,6 +45,7 @@ class UserCommand extends Command
         return true;
     }
 
+
     public function sendActivation($email, $redirect, $sciInstance)
     {
         $toSend = [
