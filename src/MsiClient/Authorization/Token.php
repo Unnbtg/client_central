@@ -23,6 +23,7 @@ class Token implements Authorizable
     {
 
         $request['headers']['Authorization'] = $this->token;
+        $request['headers']['X-Authorization'] = $this->token;
 
         return $request;
     }
