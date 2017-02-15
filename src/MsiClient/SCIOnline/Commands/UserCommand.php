@@ -9,8 +9,6 @@
 namespace MsiClient\SCIOnline\Commands;
 
 
-use MsiClient\Client;
-
 class UserCommand extends Command
 {
 
@@ -24,7 +22,7 @@ class UserCommand extends Command
 
     public function store($client)
     {
-        return $this->perform($client, Client::POST_REQUEST);
+        return $this->perform($client, \MsiClient\Client::POST_REQUEST);
     }
 
 
@@ -36,7 +34,7 @@ class UserCommand extends Command
             'redirect_to' => $redirect
         ];
 
-        $token = $this->perform($toSend, Client::POST_REQUEST, $this->getUrl().'/reset-password', [
+        $token = $this->perform($toSend, \MsiClient\Client::POST_REQUEST, $this->getUrl().'/reset-password', [
             "X-Sci-Instance" => $sciInstance
         ]);
 
@@ -54,7 +52,7 @@ class UserCommand extends Command
             'redirect_to' => $redirect
         ];
 
-        $token = $this->perform($toSend, Client::POST_REQUEST, $this->getUrl().'/send-activation', [
+        $token = $this->perform($toSend, \MsiClient\Client::POST_REQUEST, $this->getUrl().'/send-activation', [
             "X-Sci-Instance" => $sciInstance
         ]);
 
