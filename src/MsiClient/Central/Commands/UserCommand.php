@@ -10,7 +10,6 @@ namespace MsiClient\Central\Commands;
 
 use MsiClient\Central\Commands\Properties\PermissionProperties;
 use MsiClient\Central\Commands\Properties\UserProperties;
-use MsiClient\Client;
 
 
 class UserCommand extends Command
