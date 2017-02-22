@@ -135,6 +135,8 @@ class Server
             throw new \MsiClient\Exception\ServerException("Não foi possível realiazar a requisição a url: $url",
                 $e->getMessage(), 100, $params, [], $this->getErrorclient(), $e);
         } catch (ServerException $e) {
+            echo $e->getResponse()->getBody();
+            exit;
             throw new \MsiClient\Exception\ServerException("A resposta da url não estava compreensível url: $url",
                 $e->getMessage(), 500, $params, $this->_parse($e->getResponse()),
                 $this->getErrorclient(), $e, $e->getResponse());
