@@ -108,7 +108,6 @@
             }
 
             $response = $this->perform($this->getSendData($properties), $typeRequest, $url);
-
             return $properties->fromStdClass($response->data);
         }
 

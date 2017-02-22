@@ -103,6 +103,7 @@ class UserCommand extends Command
 
     public function setRememberToken($identifier, $token)
     {
+
         return $this->perform(['token' => $token], FuckAtAll::PUT_REQUEST, $this->getUrl() . "/$identifier/remember-token");
     }
 

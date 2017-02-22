@@ -12,7 +12,7 @@ namespace MsiClient\CentralV2\Repositories;
 use MsiClient\CentralV2\Entities\EntityFactory;
 use MsiClient\Client;
 
-class RepositoryAbstract
+class RepositoryAbstract implements RepositoryInterface
 {
     /***
      * @var Client $client
@@ -71,7 +71,7 @@ class RepositoryAbstract
             $verb = 'query';
         }
 
-        if ($typeRequest == Client::POST_REQUEST) {
+        if ($typeRequest == Client::POST_REQUEST || $typeRequest == Client::PUT_REQUEST) {
             $verb = 'body';
             $params = json_encode($params);
         }
@@ -81,11 +81,26 @@ class RepositoryAbstract
 
     public function update($identifier, $attributes)
     {
-        return $this->perform($attributes, Client::POST_REQUEST, $this->getUrl()."/$identifier");
+        return $this->perform($attributes, Client::PUT_REQUEST, $this->getUrl()."/$identifier");
     }
 
     public function get($params)
     {
         return $this->perform($params, Client::GET_REQUEST, $this->getUrl());
+    }
+
+    public function store($attributes)
+    {
+        return $this->perform($attributes, Client::POST_REQUEST, $this->getUrl());
+    }
+
+    public function find($identifier, $with = [])
+    {
+        return $this->perform(['with' => $with], Client::GET_REQUEST, $this->getUrl().'/'. $identifier);
+    }
+
+    public function delete($identifier)
+    {
+        return $this->perform([], Client::DELETE_REQUEST, $this->getUrl().'/'. $identifier);
     }
 }
