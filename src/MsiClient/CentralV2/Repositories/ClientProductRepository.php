@@ -18,6 +18,11 @@ class ClientProductRepository extends RepositoryAbstract
 
     public function addDomain($identify, $attributes)
     {
-        return $this->perform($attributes, Client::POST_REQUEST, $this->getUrl()."{$identify}/config/add-domain");
+        return $this->perform($attributes, Client::POST_REQUEST, $this->getUrl()."/{$identify}/config/add-domain");
+    }
+
+    public function addMxEntry($identify, $attributes)
+    {
+        return $this->perform($attributes, Client::POST_REQUEST, $this->getUrl()."/{$identify}/config/add-mx-entry");
     }
 }

@@ -26,5 +26,13 @@ class InstallCommand extends CommandAbstract
     {
         return $this->perform($params, Client::POST_REQUEST);
     }
+    public function addDomain($domain, $instance)
+    {
+        return $this->perform(
+            [
+                'domain' => $domain,
+                'instance' => $instance
+            ], Client::POST_REQUEST, $this->getUrl().'/add-host');
+    }
 
 }

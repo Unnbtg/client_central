@@ -118,7 +118,7 @@ class Server
             ) {
                 unset($params['query']);
             }
-
+            $params['connect_timeout'] = 600;
             $response = $client->request($type, $url, $params);
             return $this->_parse($response);
 
