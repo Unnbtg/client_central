@@ -32,6 +32,7 @@
             $this->parsedResult = $parsedResult;
 
             parent::__construct($programError, $code, $previous);
+
             $this->response = $response;
             if ( ! is_null($errorClient)) {
 

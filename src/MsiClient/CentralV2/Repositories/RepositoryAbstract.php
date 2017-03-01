@@ -76,6 +76,7 @@ class RepositoryAbstract implements RepositoryInterface
             $params = json_encode($params);
         }
         $toSend[$verb] = $params;
+
         return $this->client->makeRequest($url, $typeRequest, $toSend, false);
     }
 
