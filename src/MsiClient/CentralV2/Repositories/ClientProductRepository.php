@@ -14,7 +14,7 @@ use MsiClient\Client;
 class ClientProductRepository extends RepositoryAbstract
 {
 
-    protected $url = '/client-product';
+    protected $url = '/client-products';
 
     public function addDomain($identify, $attributes)
     {
@@ -24,5 +24,9 @@ class ClientProductRepository extends RepositoryAbstract
     public function addMxEntry($identify, $attributes)
     {
         return $this->perform($attributes, Client::POST_REQUEST, $this->getUrl()."/{$identify}/config/add-mx-entry");
+    }
+
+    public function changeModel($identify, $newModel) {
+        return $this->perform(["new_model" => $newModel], Client::POST_REQUEST, $this->getUrl()."/{$identify}/configs/change-model");
     }
 }
