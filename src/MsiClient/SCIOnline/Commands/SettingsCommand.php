@@ -32,4 +32,17 @@ class SettingsCommand extends Command
             'Content-Type' => 'application/json'
         ]);
     }
+
+    public function getQuantities($instance, $masterKey) {
+        try {
+            return $this->json()->perform([], \MsiClient\Client::GET_REQUEST, $this->getUrl() . '/instances/'.$instance, [
+                "X-Root-Key" => $masterKey,
+                "X-Sci-Instance" => $instance,
+                'Content-Type' => 'application/json'
+            ])->data;
+        } catch (\Exception $e) {
+            var_dump($e);exit;
+        }
+
+    }
 }

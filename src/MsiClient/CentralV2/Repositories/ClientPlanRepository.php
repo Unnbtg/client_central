@@ -21,7 +21,7 @@ class ClientPlanRepository extends RepositoryAbstract
     }
 
     public function changePlan($clientPlanId, $planId) {
-        return $this->perform(['plan_id' => $planId], Client::GET_REQUEST, $this->getUrl()."/{$clientPlanId}/change-plan");
+        return $this->perform(['plan_id' => $planId], Client::POST_REQUEST, $this->getUrl()."/{$clientPlanId}/change-plan");
     }
 
 }
