@@ -29,4 +29,9 @@ class ClientProductRepository extends RepositoryAbstract
     public function changeModel($identify, $newModel) {
         return $this->perform(["new_model" => $newModel], Client::POST_REQUEST, $this->getUrl()."/{$identify}/configs/change-model");
     }
+
+    public function removeMxZone($identify, $domainId, $attributes)
+    {
+        return $this->perform($attributes, Client::POST_REQUEST, $this->getUrl()."/{$identify}/config/remove-mx-zone/{$domainId}");
+    }
 }

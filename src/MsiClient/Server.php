@@ -106,8 +106,8 @@ class Server
         $client = new GuzzleClient();
 
         try {
-
             $params = $this->applyAuth($params);
+
 
             if ($type == \MsiClient\Client::GET_REQUEST && isset($params['form_params'])) {
                 unset($params['form_params']);
