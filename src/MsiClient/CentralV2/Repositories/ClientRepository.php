@@ -14,10 +14,6 @@ use MsiClient\Client;
 class ClientRepository extends RepositoryAbstract
 {
 
-    protected $url = "/clients/";
-
-    public function get($params) {
-        return $this->perform($params, Client::GET_REQUEST, $this->getUrl());
-    }
+    protected $url = "/clients";
 
 }
