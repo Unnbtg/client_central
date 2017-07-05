@@ -17,7 +17,7 @@
     {
         protected $parsedResult;
         protected $response;
-
+        protected $content;
         public function __construct(
             $humanReadableError,
             $programError,
@@ -28,17 +28,16 @@
             Exception $previous = null,
             ResponseInterface $response = null
         ) {
-
             $this->parsedResult = $parsedResult;
 
             parent::__construct($programError, $code, $previous);
-
             $this->response = $response;
+
             if ( ! is_null($errorClient)) {
 
                 $additionalInfo = [
                     'sent'     => $params,
-                    'response' => $this->getResponseBody()->getContents(),
+                    'response' => $this->getResponseBody(),
                     'response_code' => $this->getResponseCode()
                 ];
 
@@ -77,11 +76,16 @@
 
         public function getResponseBody()
         {
+
             if (is_null($this->response)) {
                 return null;
             }
 
-            return $this->response->getBody();
+            if (! is_null($this->content)) {
+                return $this->content;
+            }
+
+            return $this->content = $this->response->getBody()->getContents();
         }
 
         public function getErrortype()

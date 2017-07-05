@@ -23,4 +23,8 @@ class InstallCommand extends Command
         $this->perform([], \MsiClient\Client::POST_REQUEST, $this->getUrl().'/'.$clientProductId);
     }
 
+    public function quickInstall($fields)
+    {
+        return $this->perform($fields, \MsiClient\Client::POST_REQUEST, $this->client->getHost().'/quick-install');
+    }
 }

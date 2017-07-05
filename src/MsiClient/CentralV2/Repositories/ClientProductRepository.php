@@ -30,8 +30,18 @@ class ClientProductRepository extends RepositoryAbstract
         return $this->perform(["new_model" => $newModel], Client::POST_REQUEST, $this->getUrl()."/{$identify}/configs/change-model");
     }
 
+    public function getConfigs($identify, $params)
+    {
+        return $this->perform($params, Client::GET_REQUEST, $this->getUrl()."/{$identify}/configs");
+    }
+
     public function removeMxZone($identify, $domainId, $attributes)
     {
         return $this->perform($attributes, Client::POST_REQUEST, $this->getUrl()."/{$identify}/config/remove-mx-zone/{$domainId}");
+    }
+
+    public function sciOnlineLoginLink($identify)
+    {
+        return $this->perform([], Client::GET_REQUEST, $this->getUrl()."/{$identify}/sci-online/login-link");
     }
 }
