@@ -44,4 +44,13 @@ class ClientProductRepository extends RepositoryAbstract
     {
         return $this->perform([], Client::GET_REQUEST, $this->getUrl()."/{$identify}/sci-online/login-link");
     }
+
+    public function mainDomain($identify, $domainId)
+    {
+        return $this->perform(
+            ['domain_id' => $domainId],
+            Client::POST_REQUEST,
+            $this->getUrl()."/{$identify}/config/main-domain"
+        );
+    }
 }

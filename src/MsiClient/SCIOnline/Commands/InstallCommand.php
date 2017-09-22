@@ -50,4 +50,13 @@ class InstallCommand extends Command
         return $this->perform([], Client::POST_REQUEST, $this->getUrl().'/users/1/token', ['X-Sci-Instance' => $code, "X-Root-Key" => $masterKey]);
     }
 
+    public function addDomainAlias($identifier, $domain, $masterKey)
+    {
+        return $this->perform(
+            ['domain_alias' => $domain],
+            Client::PUT_REQUEST,
+            $this->getUrl()."/websites/{$identifier}/domain-alias",
+            ['X-Root-Key' => $masterKey]
+        );
+    }
 }
