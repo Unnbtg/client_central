@@ -26,6 +26,6 @@ class SystemCommand extends CommandAbstract
 
     public function uninstall($code)
     {
-        return $this->perform([], Client::POST_REQUEST, $this->getUrl().'/'.$code.'/uninstall/');
+        return $this->perform([], Client::POST_REQUEST, $this->getUrl().'/'.$code.'/uninstall');
     }
 }
