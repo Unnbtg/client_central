@@ -43,5 +43,23 @@ class OathCommand extends Command
         return $token->data->access_token;
     }
 
+    public function getLazyToken($userName, $password, $clientId, $secret) {
+        $toSend = [
+            "grant_type" => "password",
+            "username" => $userName,
+            "password" => $password,
+            "client_id" => $clientId ,
+            "client_secret" => $secret
+        ];
+
+        $token = $this->perform($toSend, Client::POST_REQUEST, $this->getUrl().'/lazy_access_token', []);
+
+        if (!is_object($token)){
+            return false;
+        }
+
+        return $token;
+    }
+
 
 }
