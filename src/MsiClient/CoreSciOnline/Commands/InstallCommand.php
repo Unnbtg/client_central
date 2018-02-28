@@ -35,4 +35,9 @@ class InstallCommand extends CommandAbstract
             ], Client::POST_REQUEST, $this->getUrl().'/add-host');
     }
 
+    public function birth($configs)
+    {
+        return $this->perform($configs, Client::POST_REQUEST, $this->getUrl().'/birth');
+    }
+
 }

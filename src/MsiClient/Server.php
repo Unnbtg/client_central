@@ -119,6 +119,7 @@ class Server
                 unset($params['query']);
             }
             $params['connect_timeout'] = 600;
+            var_dump([$url, $params], $client);
             //file_put_contents("/var/log/central_request.log", json_encode([$url, $params]). PHP_EOL, FILE_APPEND);
             $response = $client->request($type, $url, $params);
             return $this->_parse($response);

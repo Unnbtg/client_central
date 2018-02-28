@@ -18,6 +18,8 @@
         protected $parsedResult;
         protected $response;
         protected $content;
+        protected $responseContent;
+
         public function __construct(
             $humanReadableError,
             $programError,
@@ -29,6 +31,7 @@
             ResponseInterface $response = null
         ) {
             $this->parsedResult = $parsedResult;
+            $this->responseContent = $this->getResponseBody();
 
             parent::__construct($programError, $code, $previous);
             $this->response = $response;
@@ -37,7 +40,7 @@
 
                 $additionalInfo = [
                     'sent'     => $params,
-                    'response' => $this->getResponseBody(),
+                    'response' => $this->responseContent,
                     'response_code' => $this->getResponseCode()
                 ];
 
@@ -76,6 +79,9 @@
 
         public function getResponseBody()
         {
+            if (!empty($this->responseContent)) {
+                return $this->responseContent;
+            }
 
             if (is_null($this->response)) {
                 return null;
