@@ -10,6 +10,7 @@ namespace MsiClient\Login\Commands;
 
 
 use MsiClient\Client;
+use MsiClient\Exception\ServerException;
 
 class SystemCommand extends CommandAbstract
 {
@@ -27,5 +28,16 @@ class SystemCommand extends CommandAbstract
     public function uninstall($code)
     {
         return $this->perform([], Client::POST_REQUEST, $this->getUrl().'/'.$code.'/uninstall');
+    }
+
+
+    public function checkEmail($email)
+    {
+        try {
+            $this->perform(['email' => $email], Client::POST_REQUEST, $this->getUrl().'/check-email');
+            return true;
+        } catch (ServerException $e) {
+            return false;
+        }
     }
 }
