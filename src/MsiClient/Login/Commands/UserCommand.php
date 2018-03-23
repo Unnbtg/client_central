@@ -49,7 +49,7 @@ class UserCommand extends CommandAbstract
     public function email_exists($email)
     {
         try {
-            $this->perform(['email' => $email], Client::GET_REQUEST, $this->getUrl().'/exist');
+            $this->perform(['email' => $email], Client::POST_REQUEST, $this->getUrl().'/check-email');
             return true;
         } catch (ServerException $e) {
             return false;
