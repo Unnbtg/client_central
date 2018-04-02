@@ -28,4 +28,13 @@ class SystemCommand extends CommandAbstract
     {
         return $this->perform([], Client::POST_REQUEST, $this->getUrl().'/'.$code.'/uninstall');
     }
+
+    public function checkEmail($email)
+    {
+        try {
+            return $this->perform(['email' => $email], Client::POST_REQUEST, $this->getUrl().'/check-email');
+        } catch (ServerException $e) {
+            return false;
+        }
+    }
 }
