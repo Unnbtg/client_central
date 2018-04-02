@@ -10,6 +10,7 @@ namespace MsiClient\Login\Commands;
 
 
 use MsiClient\Client;
+use MsiClient\Exception\ServerException;
 
 class SystemCommand extends CommandAbstract
 {
